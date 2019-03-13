@@ -1,0 +1,8 @@
+{
+  "PathArchivePDF": "C:\\Support_CounterService\\PathArchivePDF",
+  "PathGETPDF": "C:\\Support_CounterService\\PathGETPDF",
+  "PathMonthlyReport": "C:\\Support_CounterService\\PathMonthlyReport",
+  "ReleaseDate": "2019-12-14",
+  "ImportPrefix": [ "0", "A", "C", "P" ],
+  "ExportPrefix": [ "1", "B", "D" ]
+}

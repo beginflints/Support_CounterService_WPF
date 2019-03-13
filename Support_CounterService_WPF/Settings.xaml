@@ -1,0 +1,132 @@
+﻿<Window x:Class="Support_CounterService_WPF.Settings"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Support_CounterService_WPF"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        mc:Ignorable="d"
+        Title="Settings" Height="340" Width="497">
+    <Grid Background="#E0E0E0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <materialDesign:Card Grid.Row="0" Padding="5" Margin="10" VerticalAlignment="Stretch" UniformCornerRadius="6">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="Opend_ArchivePDF" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                            Margin="5" ToolTip="Browse Folder" Click="Opend_ArchivePDF_Click">
+                        <materialDesign:PackIcon Kind="FolderOpen" Width="24" Height="24"/>
+                    </Button>
+                    <TextBox x:Name="TxtPathArchivePDF" materialDesign:HintAssist.Hint="Path Archive PDF" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10 5"/>
+                    <Button x:Name="Create_ArchivePDF" Grid.Column="2" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                            Margin="5" ToolTip="Create Folder" Click="Create_ArchivePDF_Click">
+                        <materialDesign:PackIcon Kind="FolderPlus" Width="24" Height="24"/>
+                    </Button>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="TxtPathGetPDF" materialDesign:HintAssist.Hint="Path Get PDF" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10"/>
+                    <Button x:Name="Opend_GETPDF"
+                            Grid.Column="1"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                            Margin="5"
+                            ToolTip="Browse Folder" Background="#E91E63" BorderBrush="#E91E63" Click="Opend_GETPDF_Click">
+                        <materialDesign:PackIcon Kind="FolderOpen" Width="24" Height="24"/>
+                    </Button>
+                    <Button x:Name="Create_GETPDF"
+                            Grid.Column="2"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                            Margin="5"
+                            ToolTip="Create Folder" Background="#E91E63" BorderBrush="#E91E63" Click="Create_GETPDF_Click">
+                        <materialDesign:PackIcon Kind="FolderPlus"
+                                                 Width="24"
+                                                 Height="24"/>
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="1" Padding="5" Margin="10" UniformCornerRadius="6">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="TxtPathMonthlyReport" materialDesign:HintAssist.Hint="Path Monthly Report" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10"/>
+                    <Button x:Name="Opend_MonthlyReport"
+                            Grid.Column="1"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                            Margin="5"
+                            ToolTip="Browse Folder" 
+                            Background="#F57C00" 
+                            BorderBrush="#F57C00"
+                            Click="Opend_MonthlyReport_Click">
+                        <materialDesign:PackIcon Kind="FolderOpen"
+                                                 Width="24"
+                                                 Height="24"/>
+                    </Button>
+                    <Button x:Name="Create_MonthlyFolder"
+                            Grid.Column="2"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                            Margin="5"
+                            ToolTip="Create Folder" 
+                            Background="#F57C00" 
+                            BorderBrush="#F57C00"
+                            Click="Create_MonthlyFolder_Click">
+                        <materialDesign:PackIcon Kind="FolderPlus"
+                                                 Width="24"
+                                                 Height="24"/>
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </materialDesign:Card>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="BtnLoad" 
+                    Grid.Column="0" 
+                    Content="Load" 
+                    Margin="7" 
+                    Padding="0" 
+                    Background="White" 
+                    Foreground="#1976D2" 
+                    BorderBrush="#1976D2" 
+                    BorderThickness="1" 
+                    Click="BtnLoad_Click"/>
+
+            <Button x:Name="BtnSave" 
+                    Grid.Column="1" 
+                    Content="Save" 
+                    Margin="7" 
+                    Padding="0" 
+                    Click="BtnSave_Click"
+                    />
+        </Grid>
+    </Grid>
+</Window>

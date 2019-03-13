@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="oim_newModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CT_DEC">
+          <Key>
+            <PropertyRef Name="REF_NO" />
+          </Key>
+          <Property Name="REF_NO" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="JOB_NO" Type="varchar" MaxLength="10" />
+          <Property Name="H_INV_NO" Type="varchar" MaxLength="35" />
+          <Property Name="USERNAME" Type="varchar" MaxLength="10" />
+          <Property Name="CM_CODE" Type="varchar" MaxLength="10" />
+          <Property Name="CC_CODE" Type="varchar" MaxLength="4" />
+          <Property Name="CS_CODE" Type="varchar" MaxLength="2" />
+          <Property Name="DOC_TYPE" Type="varchar" MaxLength="1" />
+          <Property Name="TRAN_TYPE" Type="varchar" MaxLength="1" />
+          <Property Name="CG_TYPE" Type="varchar" MaxLength="1" />
+          <Property Name="VES_NAME" Type="varchar" MaxLength="35" />
+          <Property Name="ARR_DATE" Type="datetime" />
+          <Property Name="MBL_NO" Type="varchar" MaxLength="35" />
+          <Property Name="HBL_NO" Type="varchar" MaxLength="35" />
+          <Property Name="OR_PORT" Type="varchar" MaxLength="4" />
+          <Property Name="RL_PORT" Type="varchar" MaxLength="4" />
+          <Property Name="DC_PORT" Type="varchar" MaxLength="4" />
+          <Property Name="O_COUN" Type="varchar" MaxLength="2" />
+          <Property Name="C_COUN" Type="varchar" MaxLength="2" />
+          <Property Name="SHIP_MARK" Type="text" />
+          <Property Name="TOT_PACK" Type="int" />
+          <Property Name="TOT_PACK_U" Type="varchar" MaxLength="3" />
+          <Property Name="N_WEIGHT" Type="decimal" Precision="11" Scale="3" />
+          <Property Name="N_WEIGHT_U" Type="varchar" MaxLength="3" />
+          <Property Name="G_WEIGHT" Type="decimal" Precision="11" Scale="3" />
+          <Property Name="G_WEIGHT_U" Type="varchar" MaxLength="3" />
+          <Property Name="CURR_CODE" Type="varchar" MaxLength="3" />
+          <Property Name="EXC_RATE" Type="decimal" Precision="12" Scale="8" />
+          <Property Name="CIF_F" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="CIF_B" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="RGS_CODE" Type="varchar" MaxLength="3" />
+          <Property Name="CBK_CODE" Type="varchar" MaxLength="3" />
+          <Property Name="BK_CODE" Type="varchar" MaxLength="3" />
+          <Property Name="BK_B_CODE" Type="varchar" MaxLength="6" />
+          <Property Name="BK_A_NO" Type="varchar" MaxLength="20" />
+          <Property Name="TOT_PAY_AMT" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="PAY_MT" Type="varchar" MaxLength="1" />
+          <Property Name="TOT_TAX_P" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_DPS" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="REF_ASS" Type="varchar" MaxLength="35" />
+          <Property Name="ASS_CODE" Type="varchar" MaxLength="1" />
+          <Property Name="INS_CODE" Type="varchar" MaxLength="1" />
+          <Property Name="DEPAR_DATE" Type="datetime" />
+          <Property Name="APP_PORT" Type="varchar" MaxLength="4" />
+          <Property Name="APP_NO" Type="varchar" MaxLength="6" />
+          <Property Name="GRT_MT" Type="varchar" MaxLength="1" />
+          <Property Name="GRT_TYPE" Type="varchar" MaxLength="1" />
+          <Property Name="GRT_BK_CODE" Type="varchar" MaxLength="3" />
+          <Property Name="GRT_BK_B_CODE" Type="varchar" MaxLength="6" />
+          <Property Name="GRT_BK_A_NO" Type="varchar" MaxLength="20" />
+          <Property Name="GRT_DPS_AMT" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="EXP_TAX_IN_ID" Type="varchar" MaxLength="17" />
+          <Property Name="CTP_TAX_NO" Type="varchar" MaxLength="17" />
+          <Property Name="CTP_B_CODE" Type="varchar" MaxLength="6" />
+          <Property Name="DEF_PAY" Type="varchar" MaxLength="5" />
+          <Property Name="TCARD_BK_CODE" Type="varchar" MaxLength="3" />
+          <Property Name="TCARD_BK_B_CODE" Type="varchar" MaxLength="6" />
+          <Property Name="TCARD_BK_A_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="TCARD_TOT_PAY" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="REG_ID" Type="varchar" MaxLength="35" />
+          <Property Name="REF_XML" Type="varchar" MaxLength="13" />
+          <Property Name="SIGN_BY" Type="varchar" MaxLength="1" />
+          <Property Name="DECSNO" Type="varchar" MaxLength="15" />
+          <Property Name="PAY_EFT_D" Type="datetime" />
+          <Property Name="PAY_EFT_N" Type="varchar" MaxLength="12" />
+          <Property Name="SENDEDI" Type="varchar" MaxLength="1" />
+          <Property Name="FRESPONS_M" Type="varchar" MaxLength="256" />
+          <Property Name="DEC_CANCEL" Type="varchar" MaxLength="1" />
+          <Property Name="DEC_CANC_M" Type="varchar" MaxLength="256" />
+          <Property Name="DATE_T" Type="datetime" />
+          <Property Name="FOR_CURR" Type="varchar" MaxLength="3" />
+          <Property Name="FOR_F" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="FRI_CURR" Type="varchar" MaxLength="3" />
+          <Property Name="FRI_F" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="INS_CURR" Type="varchar" MaxLength="3" />
+          <Property Name="INS_F" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="PACK_CURR" Type="varchar" MaxLength="3" />
+          <Property Name="PACK_F" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="INL_CURR" Type="varchar" MaxLength="3" />
+          <Property Name="INL_F" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="LAN_CURR" Type="varchar" MaxLength="3" />
+          <Property Name="LAN_F" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="OTH_CURR" Type="varchar" MaxLength="3" />
+          <Property Name="OTH_F" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_IMD" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_IMD_DPS" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_EXC" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_EXC_DPS" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_LOC" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_LOC_DPS" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_VAT" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_VAT_DPS" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_OTH" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_OTH_DPS" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="ESTIBIS_N" Type="varchar" MaxLength="4" />
+          <Property Name="FACTORY_N" Type="varchar" MaxLength="8" />
+          <Property Name="F_PRINT" Type="varchar" MaxLength="1" />
+          <Property Name="DESCRIPT_M" Type="text" />
+          <Property Name="AVG_TYPE" Type="varchar" MaxLength="1" />
+          <Property Name="AVG_OTH" Type="varchar" MaxLength="1" />
+          <Property Name="CON_REF" Type="varchar" MaxLength="1" />
+          <Property Name="EDIT_USER" Type="varchar" MaxLength="10" />
+          <Property Name="EDIT_DATE" Type="datetime" />
+          <Property Name="AVG_INV" Type="varchar" MaxLength="1" />
+          <Property Name="AUDITOR_N" Type="varchar" MaxLength="15" />
+          <Property Name="AVG_ALL" Type="varchar" MaxLength="1" />
+          <Property Name="WEB_CONFIRM_S" Type="varchar" MaxLength="1" />
+          <Property Name="ACCEPT_DATE" Type="smalldatetime" />
+          <Property Name="DELIVERY_DATE" Type="smalldatetime" />
+          <Property Name="TOT_FEE" Type="decimal" Precision="16" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="oim_newModelStoreContainer">
+          <EntitySet Name="CT_DEC" EntityType="Self.CT_DEC" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="oim_newModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CT_DEC">
+          <Key>
+            <PropertyRef Name="REF_NO" />
+          </Key>
+          <Property Name="REF_NO" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="JOB_NO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="H_INV_NO" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="USERNAME" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CM_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CC_CODE" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="CS_CODE" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="DOC_TYPE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="TRAN_TYPE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CG_TYPE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="VES_NAME" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="ARR_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MBL_NO" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="HBL_NO" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="OR_PORT" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="RL_PORT" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DC_PORT" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="O_COUN" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="C_COUN" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="SHIP_MARK" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TOT_PACK" Type="Int32" />
+          <Property Name="TOT_PACK_U" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="N_WEIGHT" Type="Decimal" Precision="11" Scale="3" />
+          <Property Name="N_WEIGHT_U" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="G_WEIGHT" Type="Decimal" Precision="11" Scale="3" />
+          <Property Name="G_WEIGHT_U" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="CURR_CODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="EXC_RATE" Type="Decimal" Precision="12" Scale="8" />
+          <Property Name="CIF_F" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="CIF_B" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="RGS_CODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="CBK_CODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="BK_CODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="BK_B_CODE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="BK_A_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TOT_PAY_AMT" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="PAY_MT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="TOT_TAX_P" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_DPS" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="REF_ASS" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="ASS_CODE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="INS_CODE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DEPAR_DATE" Type="DateTime" Precision="3" />
+          <Property Name="APP_PORT" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="APP_NO" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="GRT_MT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="GRT_TYPE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="GRT_BK_CODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="GRT_BK_B_CODE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="GRT_BK_A_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="GRT_DPS_AMT" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="EXP_TAX_IN_ID" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="CTP_TAX_NO" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="CTP_B_CODE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="DEF_PAY" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="TCARD_BK_CODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="TCARD_BK_B_CODE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="TCARD_BK_A_CODE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TCARD_TOT_PAY" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="REG_ID" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="REF_XML" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="SIGN_BY" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DECSNO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PAY_EFT_D" Type="DateTime" Precision="3" />
+          <Property Name="PAY_EFT_N" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="SENDEDI" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="FRESPONS_M" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="DEC_CANCEL" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DEC_CANC_M" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_T" Type="DateTime" Precision="3" />
+          <Property Name="FOR_CURR" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="FOR_F" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="FRI_CURR" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="FRI_F" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="INS_CURR" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="INS_F" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="PACK_CURR" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="PACK_F" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="INL_CURR" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="INL_F" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="LAN_CURR" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="LAN_F" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="OTH_CURR" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="OTH_F" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_IMD" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_IMD_DPS" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_EXC" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_EXC_DPS" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_LOC" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_LOC_DPS" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_VAT" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_VAT_DPS" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_OTH" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_OTH_DPS" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="ESTIBIS_N" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="FACTORY_N" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="F_PRINT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPT_M" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AVG_TYPE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="AVG_OTH" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CON_REF" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="EDIT_USER" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EDIT_DATE" Type="DateTime" Precision="3" />
+          <Property Name="AVG_INV" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="AUDITOR_N" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="AVG_ALL" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="WEB_CONFIRM_S" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ACCEPT_DATE" Type="DateTime" Precision="0" />
+          <Property Name="DELIVERY_DATE" Type="DateTime" Precision="0" />
+          <Property Name="TOT_FEE" Type="Decimal" Precision="16" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="oim_newEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CT_DEC" EntityType="Self.CT_DEC" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="oim_newModelStoreContainer" CdmEntityContainer="oim_newEntities">
+          <EntitySetMapping Name="CT_DEC">
+            <EntityTypeMapping TypeName="oim_newModel.CT_DEC">
+              <MappingFragment StoreEntitySet="CT_DEC">
+                <ScalarProperty Name="REF_NO" ColumnName="REF_NO" />
+                <ScalarProperty Name="JOB_NO" ColumnName="JOB_NO" />
+                <ScalarProperty Name="H_INV_NO" ColumnName="H_INV_NO" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="CM_CODE" ColumnName="CM_CODE" />
+                <ScalarProperty Name="CC_CODE" ColumnName="CC_CODE" />
+                <ScalarProperty Name="CS_CODE" ColumnName="CS_CODE" />
+                <ScalarProperty Name="DOC_TYPE" ColumnName="DOC_TYPE" />
+                <ScalarProperty Name="TRAN_TYPE" ColumnName="TRAN_TYPE" />
+                <ScalarProperty Name="CG_TYPE" ColumnName="CG_TYPE" />
+                <ScalarProperty Name="VES_NAME" ColumnName="VES_NAME" />
+                <ScalarProperty Name="ARR_DATE" ColumnName="ARR_DATE" />
+                <ScalarProperty Name="MBL_NO" ColumnName="MBL_NO" />
+                <ScalarProperty Name="HBL_NO" ColumnName="HBL_NO" />
+                <ScalarProperty Name="OR_PORT" ColumnName="OR_PORT" />
+                <ScalarProperty Name="RL_PORT" ColumnName="RL_PORT" />
+                <ScalarProperty Name="DC_PORT" ColumnName="DC_PORT" />
+                <ScalarProperty Name="O_COUN" ColumnName="O_COUN" />
+                <ScalarProperty Name="C_COUN" ColumnName="C_COUN" />
+                <ScalarProperty Name="SHIP_MARK" ColumnName="SHIP_MARK" />
+                <ScalarProperty Name="TOT_PACK" ColumnName="TOT_PACK" />
+                <ScalarProperty Name="TOT_PACK_U" ColumnName="TOT_PACK_U" />
+                <ScalarProperty Name="N_WEIGHT" ColumnName="N_WEIGHT" />
+                <ScalarProperty Name="N_WEIGHT_U" ColumnName="N_WEIGHT_U" />
+                <ScalarProperty Name="G_WEIGHT" ColumnName="G_WEIGHT" />
+                <ScalarProperty Name="G_WEIGHT_U" ColumnName="G_WEIGHT_U" />
+                <ScalarProperty Name="CURR_CODE" ColumnName="CURR_CODE" />
+                <ScalarProperty Name="EXC_RATE" ColumnName="EXC_RATE" />
+                <ScalarProperty Name="CIF_F" ColumnName="CIF_F" />
+                <ScalarProperty Name="CIF_B" ColumnName="CIF_B" />
+                <ScalarProperty Name="RGS_CODE" ColumnName="RGS_CODE" />
+                <ScalarProperty Name="CBK_CODE" ColumnName="CBK_CODE" />
+                <ScalarProperty Name="BK_CODE" ColumnName="BK_CODE" />
+                <ScalarProperty Name="BK_B_CODE" ColumnName="BK_B_CODE" />
+                <ScalarProperty Name="BK_A_NO" ColumnName="BK_A_NO" />
+                <ScalarProperty Name="TOT_PAY_AMT" ColumnName="TOT_PAY_AMT" />
+                <ScalarProperty Name="PAY_MT" ColumnName="PAY_MT" />
+                <ScalarProperty Name="TOT_TAX_P" ColumnName="TOT_TAX_P" />
+                <ScalarProperty Name="TOT_DPS" ColumnName="TOT_DPS" />
+                <ScalarProperty Name="REF_ASS" ColumnName="REF_ASS" />
+                <ScalarProperty Name="ASS_CODE" ColumnName="ASS_CODE" />
+                <ScalarProperty Name="INS_CODE" ColumnName="INS_CODE" />
+                <ScalarProperty Name="DEPAR_DATE" ColumnName="DEPAR_DATE" />
+                <ScalarProperty Name="APP_PORT" ColumnName="APP_PORT" />
+                <ScalarProperty Name="APP_NO" ColumnName="APP_NO" />
+                <ScalarProperty Name="GRT_MT" ColumnName="GRT_MT" />
+                <ScalarProperty Name="GRT_TYPE" ColumnName="GRT_TYPE" />
+                <ScalarProperty Name="GRT_BK_CODE" ColumnName="GRT_BK_CODE" />
+                <ScalarProperty Name="GRT_BK_B_CODE" ColumnName="GRT_BK_B_CODE" />
+                <ScalarProperty Name="GRT_BK_A_NO" ColumnName="GRT_BK_A_NO" />
+                <ScalarProperty Name="GRT_DPS_AMT" ColumnName="GRT_DPS_AMT" />
+                <ScalarProperty Name="EXP_TAX_IN_ID" ColumnName="EXP_TAX_IN_ID" />
+                <ScalarProperty Name="CTP_TAX_NO" ColumnName="CTP_TAX_NO" />
+                <ScalarProperty Name="CTP_B_CODE" ColumnName="CTP_B_CODE" />
+                <ScalarProperty Name="DEF_PAY" ColumnName="DEF_PAY" />
+                <ScalarProperty Name="TCARD_BK_CODE" ColumnName="TCARD_BK_CODE" />
+                <ScalarProperty Name="TCARD_BK_B_CODE" ColumnName="TCARD_BK_B_CODE" />
+                <ScalarProperty Name="TCARD_BK_A_CODE" ColumnName="TCARD_BK_A_CODE" />
+                <ScalarProperty Name="TCARD_TOT_PAY" ColumnName="TCARD_TOT_PAY" />
+                <ScalarProperty Name="REG_ID" ColumnName="REG_ID" />
+                <ScalarProperty Name="REF_XML" ColumnName="REF_XML" />
+                <ScalarProperty Name="SIGN_BY" ColumnName="SIGN_BY" />
+                <ScalarProperty Name="DECSNO" ColumnName="DECSNO" />
+                <ScalarProperty Name="PAY_EFT_D" ColumnName="PAY_EFT_D" />
+                <ScalarProperty Name="PAY_EFT_N" ColumnName="PAY_EFT_N" />
+                <ScalarProperty Name="SENDEDI" ColumnName="SENDEDI" />
+                <ScalarProperty Name="FRESPONS_M" ColumnName="FRESPONS_M" />
+                <ScalarProperty Name="DEC_CANCEL" ColumnName="DEC_CANCEL" />
+                <ScalarProperty Name="DEC_CANC_M" ColumnName="DEC_CANC_M" />
+                <ScalarProperty Name="DATE_T" ColumnName="DATE_T" />
+                <ScalarProperty Name="FOR_CURR" ColumnName="FOR_CURR" />
+                <ScalarProperty Name="FOR_F" ColumnName="FOR_F" />
+                <ScalarProperty Name="FRI_CURR" ColumnName="FRI_CURR" />
+                <ScalarProperty Name="FRI_F" ColumnName="FRI_F" />
+                <ScalarProperty Name="INS_CURR" ColumnName="INS_CURR" />
+                <ScalarProperty Name="INS_F" ColumnName="INS_F" />
+                <ScalarProperty Name="PACK_CURR" ColumnName="PACK_CURR" />
+                <ScalarProperty Name="PACK_F" ColumnName="PACK_F" />
+                <ScalarProperty Name="INL_CURR" ColumnName="INL_CURR" />
+                <ScalarProperty Name="INL_F" ColumnName="INL_F" />
+                <ScalarProperty Name="LAN_CURR" ColumnName="LAN_CURR" />
+                <ScalarProperty Name="LAN_F" ColumnName="LAN_F" />
+                <ScalarProperty Name="OTH_CURR" ColumnName="OTH_CURR" />
+                <ScalarProperty Name="OTH_F" ColumnName="OTH_F" />
+                <ScalarProperty Name="TOT_IMD" ColumnName="TOT_IMD" />
+                <ScalarProperty Name="TOT_IMD_DPS" ColumnName="TOT_IMD_DPS" />
+                <ScalarProperty Name="TOT_EXC" ColumnName="TOT_EXC" />
+                <ScalarProperty Name="TOT_EXC_DPS" ColumnName="TOT_EXC_DPS" />
+                <ScalarProperty Name="TOT_LOC" ColumnName="TOT_LOC" />
+                <ScalarProperty Name="TOT_LOC_DPS" ColumnName="TOT_LOC_DPS" />
+                <ScalarProperty Name="TOT_VAT" ColumnName="TOT_VAT" />
+                <ScalarProperty Name="TOT_VAT_DPS" ColumnName="TOT_VAT_DPS" />
+                <ScalarProperty Name="TOT_OTH" ColumnName="TOT_OTH" />
+                <ScalarProperty Name="TOT_OTH_DPS" ColumnName="TOT_OTH_DPS" />
+                <ScalarProperty Name="ESTIBIS_N" ColumnName="ESTIBIS_N" />
+                <ScalarProperty Name="FACTORY_N" ColumnName="FACTORY_N" />
+                <ScalarProperty Name="F_PRINT" ColumnName="F_PRINT" />
+                <ScalarProperty Name="DESCRIPT_M" ColumnName="DESCRIPT_M" />
+                <ScalarProperty Name="AVG_TYPE" ColumnName="AVG_TYPE" />
+                <ScalarProperty Name="AVG_OTH" ColumnName="AVG_OTH" />
+                <ScalarProperty Name="CON_REF" ColumnName="CON_REF" />
+                <ScalarProperty Name="EDIT_USER" ColumnName="EDIT_USER" />
+                <ScalarProperty Name="EDIT_DATE" ColumnName="EDIT_DATE" />
+                <ScalarProperty Name="AVG_INV" ColumnName="AVG_INV" />
+                <ScalarProperty Name="AUDITOR_N" ColumnName="AUDITOR_N" />
+                <ScalarProperty Name="AVG_ALL" ColumnName="AVG_ALL" />
+                <ScalarProperty Name="WEB_CONFIRM_S" ColumnName="WEB_CONFIRM_S" />
+                <ScalarProperty Name="ACCEPT_DATE" ColumnName="ACCEPT_DATE" />
+                <ScalarProperty Name="DELIVERY_DATE" ColumnName="DELIVERY_DATE" />
+                <ScalarProperty Name="TOT_FEE" ColumnName="TOT_FEE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

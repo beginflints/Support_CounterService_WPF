@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EXPORT_AIRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="HDEC">
+          <Key>
+            <PropertyRef Name="REFNO" />
+          </Key>
+          <Property Name="REFNO" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="RUNNO" Type="varchar" MaxLength="12" />
+          <Property Name="CMCODE" Type="varchar" MaxLength="10" />
+          <Property Name="BCMCODE" Type="varchar" MaxLength="5" />
+          <Property Name="CCARD" Type="varchar" MaxLength="17" />
+          <Property Name="MCARD" Type="varchar" MaxLength="17" />
+          <Property Name="REFXML" Type="varchar" MaxLength="13" />
+          <Property Name="INVNO" Type="varchar" MaxLength="5000" />
+          <Property Name="TRANSPORT_M" Type="varchar" MaxLength="1" />
+          <Property Name="CARGO_TYPE" Type="varchar" MaxLength="1" />
+          <Property Name="VESSEL_N" Type="varchar" MaxLength="35" />
+          <Property Name="DEPART_DATE" Type="smalldatetime" />
+          <Property Name="MASTER_BL" Type="varchar" MaxLength="35" />
+          <Property Name="HOUSE_BL" Type="varchar" MaxLength="35" />
+          <Property Name="ESTABLISH_N" Type="varchar" MaxLength="4" />
+          <Property Name="FACTORY_N" Type="varchar" MaxLength="8" />
+          <Property Name="RELEASE_P" Type="varchar" MaxLength="4" />
+          <Property Name="LOAD_P" Type="varchar" MaxLength="4" />
+          <Property Name="DISCHAR_P" Type="varchar" MaxLength="4" />
+          <Property Name="PURCHASE_C" Type="varchar" MaxLength="2" />
+          <Property Name="DEST_C" Type="varchar" MaxLength="2" />
+          <Property Name="SHIP_MARK" Type="varchar" MaxLength="512" />
+          <Property Name="TOTPACK" Type="numeric" Precision="8" Scale="0" />
+          <Property Name="TOTPACK_U" Type="varchar" MaxLength="3" />
+          <Property Name="TOTNET" Type="numeric" Precision="11" Scale="3" />
+          <Property Name="TOTNET_U" Type="varchar" MaxLength="3" />
+          <Property Name="TOTGROSS" Type="numeric" Precision="11" Scale="3" />
+          <Property Name="TOTGROSS_U" Type="varchar" MaxLength="3" />
+          <Property Name="CURR_CODE" Type="varchar" MaxLength="3" />
+          <Property Name="EXCH_R" Type="numeric" Precision="12" Scale="5" />
+          <Property Name="TOTFOB_F" Type="numeric" Precision="16" Scale="2" />
+          <Property Name="TOTFOB_B" Type="numeric" Precision="16" Scale="2" />
+          <Property Name="RGS" Type="varchar" MaxLength="3" />
+          <Property Name="CUSTOM_BANKCODE" Type="varchar" MaxLength="3" />
+          <Property Name="CM_BANKID" Type="varchar" MaxLength="2" />
+          <Property Name="TOT_PAYMENT_AMT" Type="numeric" Precision="16" Scale="2" />
+          <Property Name="PAY_METHOD" Type="varchar" MaxLength="1" />
+          <Property Name="TOT_TAX" Type="numeric" Precision="16" Scale="2" />
+          <Property Name="TOT_DEPOSIT" Type="numeric" Precision="16" Scale="2" />
+          <Property Name="COMMOM_ACCESS" Type="varchar" MaxLength="35" />
+          <Property Name="ASSESSMENT_R" Type="varchar" MaxLength="1" />
+          <Property Name="INSPECT_R" Type="varchar" MaxLength="1" />
+          <Property Name="GUARANTEE_METHOD" Type="varchar" MaxLength="1" />
+          <Property Name="GUARANTEE_TYPE" Type="varchar" MaxLength="1" />
+          <Property Name="GUARANTEE_BANKCODE" Type="varchar" MaxLength="3" />
+          <Property Name="GUARANTEE_TOT_DEPOSIT" Type="numeric" Precision="16" Scale="2" />
+          <Property Name="EXPORT_INTENSIVE_ID" Type="varchar" MaxLength="17" />
+          <Property Name="TRADE_PARTNER_TAX" Type="varchar" MaxLength="17" />
+          <Property Name="TRADE_PARTNER_BRANCH" Type="varchar" MaxLength="6" />
+          <Property Name="SUB_BROKER_TAX" Type="varchar" MaxLength="17" />
+          <Property Name="DEFERRED_PAYMENT" Type="varchar" MaxLength="5" />
+          <Property Name="SEND_DATE" Type="smalldatetime" />
+          <Property Name="ACCEPT_DATE" Type="smalldatetime" />
+          <Property Name="CLEAR_DATE" Type="smalldatetime" />
+          <Property Name="LOAD_DATE" Type="smalldatetime" />
+          <Property Name="CANCEL_S" Type="varchar" MaxLength="1" />
+          <Property Name="CANCEL_DATE" Type="smalldatetime" />
+          <Property Name="CREATE_DATE" Type="smalldatetime" />
+          <Property Name="LAST_UPDATE" Type="smalldatetime" />
+          <Property Name="STATUS" Type="char" MaxLength="1" />
+          <Property Name="DECLARATION_NO" Type="varchar" MaxLength="14" />
+          <Property Name="USERNAME" Type="varchar" MaxLength="20" />
+          <Property Name="BACK_PAPER_NOTE" Type="nvarchar" MaxLength="1024" />
+          <Property Name="SIGN_DEC_BY" Type="char" MaxLength="1" />
+          <Property Name="SIGN_GOOD_BY" Type="char" MaxLength="1" />
+          <Property Name="DOC_TYPE" Type="char" MaxLength="1" />
+          <Property Name="CHECK_RECIEVE_BACK" Type="char" MaxLength="1" />
+          <Property Name="REFSHORT" Type="varchar" MaxLength="15" />
+          <Property Name="REFSHORT_CUSTOMS" Type="varchar" MaxLength="13" />
+          <Property Name="SHORT_TOTPACK" Type="int" />
+          <Property Name="SHORT_STATUS" Type="varchar" MaxLength="1" />
+          <Property Name="SHORT_USER" Type="varchar" MaxLength="20" />
+          <Property Name="SHORT_LASTUPDATE" Type="smalldatetime" />
+          <Property Name="REFSHORTPOST" Type="varchar" MaxLength="15" />
+          <Property Name="REFSHORTPOST_CUSTOMS" Type="varchar" MaxLength="13" />
+          <Property Name="SHORTPOST_TOTPACK" Type="int" />
+          <Property Name="SHORTPOST_USER" Type="varchar" MaxLength="20" />
+          <Property Name="SHORTPOST_LASTUPDATE" Type="smalldatetime" />
+          <Property Name="TOTQTY" Type="decimal" Precision="15" Scale="3" />
+          <Property Name="TOTQTY_U" Type="nvarchar" MaxLength="3" />
+          <Property Name="DETAILFOB_VF" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="DETAILFOB_VB" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="CUSTOMS_MSG" Type="varchar" MaxLength="256" />
+          <Property Name="COMPANY_L" Type="char" MaxLength="2" />
+          <Property Name="CUSTOMS_CONT_MSG" Type="varchar" MaxLength="256" />
+          <Property Name="EXPORT_DATE" Type="smalldatetime" />
+          <Property Name="PROFILE" Type="varchar" MaxLength="1" />
+          <Property Name="CANCEL_MSG" Type="varchar" MaxLength="512" />
+          <Property Name="COMPEN_ID" Type="varchar" MaxLength="50" />
+          <Property Name="SHORT_TOTNET" Type="decimal" Precision="11" Scale="3" />
+          <Property Name="SHORT_TOTGROSS" Type="decimal" Precision="11" Scale="3" />
+          <Property Name="SHORTPOST_TOTNET" Type="decimal" Precision="11" Scale="3" />
+          <Property Name="SHORTPOST_TOTGROSS" Type="decimal" Precision="11" Scale="3" />
+          <Property Name="CM_TAX" Type="varchar" MaxLength="17" />
+          <Property Name="CM_BRANCH" Type="varchar" MaxLength="6" />
+          <Property Name="CM_THAI" Type="varchar" MaxLength="120" />
+          <Property Name="CM_ENG" Type="varchar" MaxLength="70" />
+          <Property Name="CM_STREET" Type="varchar" MaxLength="150" />
+          <Property Name="CM_DISTRICT" Type="varchar" MaxLength="35" />
+          <Property Name="CM_SUBPROVINCE" Type="varchar" MaxLength="35" />
+          <Property Name="CM_PROVINCE" Type="varchar" MaxLength="35" />
+          <Property Name="CM_POSTCODE" Type="varchar" MaxLength="9" />
+          <Property Name="VOY" Type="varchar" MaxLength="15" />
+          <Property Name="CM_PHONE" Type="varchar" MaxLength="35" />
+          <Property Name="CM_FAX" Type="varchar" MaxLength="35" />
+          <Property Name="WEB_STATUS" Type="char" MaxLength="1" />
+          <Property Name="WEB_REASON" Type="varchar" MaxLength="512" />
+          <Property Name="SPECIAL_REMARK" Type="nvarchar" MaxLength="512" />
+          <Property Name="CUTLIST" Type="char" MaxLength="1" />
+          <Property Name="CUTDATE" Type="smalldatetime" />
+          <Property Name="CUTLIST_PRINTDATE" Type="smalldatetime" />
+          <Property Name="CHECK_AUDIT" Type="char" MaxLength="1" />
+          <Property Name="CHECK_TRANFER" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityContainer Name="EXPORT_AIRModelStoreContainer">
+          <EntitySet Name="HDEC" EntityType="Self.HDEC" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EXPORT_AIRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="HDEC">
+          <Key>
+            <PropertyRef Name="REFNO" />
+          </Key>
+          <Property Name="REFNO" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RUNNO" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="CMCODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="BCMCODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="CCARD" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="MCARD" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="REFXML" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="INVNO" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="TRANSPORT_M" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CARGO_TYPE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="VESSEL_N" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="DEPART_DATE" Type="DateTime" Precision="0" />
+          <Property Name="MASTER_BL" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="HOUSE_BL" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="ESTABLISH_N" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="FACTORY_N" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="RELEASE_P" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="LOAD_P" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DISCHAR_P" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="PURCHASE_C" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="DEST_C" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="SHIP_MARK" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="TOTPACK" Type="Decimal" Precision="8" Scale="0" />
+          <Property Name="TOTPACK_U" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="TOTNET" Type="Decimal" Precision="11" Scale="3" />
+          <Property Name="TOTNET_U" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="TOTGROSS" Type="Decimal" Precision="11" Scale="3" />
+          <Property Name="TOTGROSS_U" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="CURR_CODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="EXCH_R" Type="Decimal" Precision="12" Scale="5" />
+          <Property Name="TOTFOB_F" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="TOTFOB_B" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="RGS" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="CUSTOM_BANKCODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="CM_BANKID" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="TOT_PAYMENT_AMT" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="PAY_METHOD" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="TOT_TAX" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="TOT_DEPOSIT" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="COMMOM_ACCESS" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="ASSESSMENT_R" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="INSPECT_R" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="GUARANTEE_METHOD" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="GUARANTEE_TYPE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="GUARANTEE_BANKCODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="GUARANTEE_TOT_DEPOSIT" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="EXPORT_INTENSIVE_ID" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="TRADE_PARTNER_TAX" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="TRADE_PARTNER_BRANCH" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="SUB_BROKER_TAX" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="DEFERRED_PAYMENT" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="SEND_DATE" Type="DateTime" Precision="0" />
+          <Property Name="ACCEPT_DATE" Type="DateTime" Precision="0" />
+          <Property Name="CLEAR_DATE" Type="DateTime" Precision="0" />
+          <Property Name="LOAD_DATE" Type="DateTime" Precision="0" />
+          <Property Name="CANCEL_S" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CANCEL_DATE" Type="DateTime" Precision="0" />
+          <Property Name="CREATE_DATE" Type="DateTime" Precision="0" />
+          <Property Name="LAST_UPDATE" Type="DateTime" Precision="0" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DECLARATION_NO" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="USERNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BACK_PAPER_NOTE" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="SIGN_DEC_BY" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="SIGN_GOOD_BY" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DOC_TYPE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="CHECK_RECIEVE_BACK" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="REFSHORT" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="REFSHORT_CUSTOMS" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="SHORT_TOTPACK" Type="Int32" />
+          <Property Name="SHORT_STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="SHORT_USER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SHORT_LASTUPDATE" Type="DateTime" Precision="0" />
+          <Property Name="REFSHORTPOST" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="REFSHORTPOST_CUSTOMS" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="SHORTPOST_TOTPACK" Type="Int32" />
+          <Property Name="SHORTPOST_USER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SHORTPOST_LASTUPDATE" Type="DateTime" Precision="0" />
+          <Property Name="TOTQTY" Type="Decimal" Precision="15" Scale="3" />
+          <Property Name="TOTQTY_U" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="DETAILFOB_VF" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="DETAILFOB_VB" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="CUSTOMS_MSG" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="COMPANY_L" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="CUSTOMS_CONT_MSG" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="EXPORT_DATE" Type="DateTime" Precision="0" />
+          <Property Name="PROFILE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CANCEL_MSG" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="COMPEN_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SHORT_TOTNET" Type="Decimal" Precision="11" Scale="3" />
+          <Property Name="SHORT_TOTGROSS" Type="Decimal" Precision="11" Scale="3" />
+          <Property Name="SHORTPOST_TOTNET" Type="Decimal" Precision="11" Scale="3" />
+          <Property Name="SHORTPOST_TOTGROSS" Type="Decimal" Precision="11" Scale="3" />
+          <Property Name="CM_TAX" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="CM_BRANCH" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="CM_THAI" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="CM_ENG" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="CM_STREET" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CM_DISTRICT" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="CM_SUBPROVINCE" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="CM_PROVINCE" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="CM_POSTCODE" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="VOY" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CM_PHONE" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="CM_FAX" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="WEB_STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="WEB_REASON" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="SPECIAL_REMARK" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="CUTLIST" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="CUTDATE" Type="DateTime" Precision="0" />
+          <Property Name="CUTLIST_PRINTDATE" Type="DateTime" Precision="0" />
+          <Property Name="CHECK_AUDIT" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="CHECK_TRANFER" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="EXPORT_AIREntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="HDECs" EntityType="Self.HDEC" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EXPORT_AIRModelStoreContainer" CdmEntityContainer="EXPORT_AIREntities">
+          <EntitySetMapping Name="HDECs">
+            <EntityTypeMapping TypeName="EXPORT_AIRModel.HDEC">
+              <MappingFragment StoreEntitySet="HDEC">
+                <ScalarProperty Name="REFNO" ColumnName="REFNO" />
+                <ScalarProperty Name="RUNNO" ColumnName="RUNNO" />
+                <ScalarProperty Name="CMCODE" ColumnName="CMCODE" />
+                <ScalarProperty Name="BCMCODE" ColumnName="BCMCODE" />
+                <ScalarProperty Name="CCARD" ColumnName="CCARD" />
+                <ScalarProperty Name="MCARD" ColumnName="MCARD" />
+                <ScalarProperty Name="REFXML" ColumnName="REFXML" />
+                <ScalarProperty Name="INVNO" ColumnName="INVNO" />
+                <ScalarProperty Name="TRANSPORT_M" ColumnName="TRANSPORT_M" />
+                <ScalarProperty Name="CARGO_TYPE" ColumnName="CARGO_TYPE" />
+                <ScalarProperty Name="VESSEL_N" ColumnName="VESSEL_N" />
+                <ScalarProperty Name="DEPART_DATE" ColumnName="DEPART_DATE" />
+                <ScalarProperty Name="MASTER_BL" ColumnName="MASTER_BL" />
+                <ScalarProperty Name="HOUSE_BL" ColumnName="HOUSE_BL" />
+                <ScalarProperty Name="ESTABLISH_N" ColumnName="ESTABLISH_N" />
+                <ScalarProperty Name="FACTORY_N" ColumnName="FACTORY_N" />
+                <ScalarProperty Name="RELEASE_P" ColumnName="RELEASE_P" />
+                <ScalarProperty Name="LOAD_P" ColumnName="LOAD_P" />
+                <ScalarProperty Name="DISCHAR_P" ColumnName="DISCHAR_P" />
+                <ScalarProperty Name="PURCHASE_C" ColumnName="PURCHASE_C" />
+                <ScalarProperty Name="DEST_C" ColumnName="DEST_C" />
+                <ScalarProperty Name="SHIP_MARK" ColumnName="SHIP_MARK" />
+                <ScalarProperty Name="TOTPACK" ColumnName="TOTPACK" />
+                <ScalarProperty Name="TOTPACK_U" ColumnName="TOTPACK_U" />
+                <ScalarProperty Name="TOTNET" ColumnName="TOTNET" />
+                <ScalarProperty Name="TOTNET_U" ColumnName="TOTNET_U" />
+                <ScalarProperty Name="TOTGROSS" ColumnName="TOTGROSS" />
+                <ScalarProperty Name="TOTGROSS_U" ColumnName="TOTGROSS_U" />
+                <ScalarProperty Name="CURR_CODE" ColumnName="CURR_CODE" />
+                <ScalarProperty Name="EXCH_R" ColumnName="EXCH_R" />
+                <ScalarProperty Name="TOTFOB_F" ColumnName="TOTFOB_F" />
+                <ScalarProperty Name="TOTFOB_B" ColumnName="TOTFOB_B" />
+                <ScalarProperty Name="RGS" ColumnName="RGS" />
+                <ScalarProperty Name="CUSTOM_BANKCODE" ColumnName="CUSTOM_BANKCODE" />
+                <ScalarProperty Name="CM_BANKID" ColumnName="CM_BANKID" />
+                <ScalarProperty Name="TOT_PAYMENT_AMT" ColumnName="TOT_PAYMENT_AMT" />
+                <ScalarProperty Name="PAY_METHOD" ColumnName="PAY_METHOD" />
+                <ScalarProperty Name="TOT_TAX" ColumnName="TOT_TAX" />
+                <ScalarProperty Name="TOT_DEPOSIT" ColumnName="TOT_DEPOSIT" />
+                <ScalarProperty Name="COMMOM_ACCESS" ColumnName="COMMOM_ACCESS" />
+                <ScalarProperty Name="ASSESSMENT_R" ColumnName="ASSESSMENT_R" />
+                <ScalarProperty Name="INSPECT_R" ColumnName="INSPECT_R" />
+                <ScalarProperty Name="GUARANTEE_METHOD" ColumnName="GUARANTEE_METHOD" />
+                <ScalarProperty Name="GUARANTEE_TYPE" ColumnName="GUARANTEE_TYPE" />
+                <ScalarProperty Name="GUARANTEE_BANKCODE" ColumnName="GUARANTEE_BANKCODE" />
+                <ScalarProperty Name="GUARANTEE_TOT_DEPOSIT" ColumnName="GUARANTEE_TOT_DEPOSIT" />
+                <ScalarProperty Name="EXPORT_INTENSIVE_ID" ColumnName="EXPORT_INTENSIVE_ID" />
+                <ScalarProperty Name="TRADE_PARTNER_TAX" ColumnName="TRADE_PARTNER_TAX" />
+                <ScalarProperty Name="TRADE_PARTNER_BRANCH" ColumnName="TRADE_PARTNER_BRANCH" />
+                <ScalarProperty Name="SUB_BROKER_TAX" ColumnName="SUB_BROKER_TAX" />
+                <ScalarProperty Name="DEFERRED_PAYMENT" ColumnName="DEFERRED_PAYMENT" />
+                <ScalarProperty Name="SEND_DATE" ColumnName="SEND_DATE" />
+                <ScalarProperty Name="ACCEPT_DATE" ColumnName="ACCEPT_DATE" />
+                <ScalarProperty Name="CLEAR_DATE" ColumnName="CLEAR_DATE" />
+                <ScalarProperty Name="LOAD_DATE" ColumnName="LOAD_DATE" />
+                <ScalarProperty Name="CANCEL_S" ColumnName="CANCEL_S" />
+                <ScalarProperty Name="CANCEL_DATE" ColumnName="CANCEL_DATE" />
+                <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+                <ScalarProperty Name="LAST_UPDATE" ColumnName="LAST_UPDATE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="DECLARATION_NO" ColumnName="DECLARATION_NO" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="BACK_PAPER_NOTE" ColumnName="BACK_PAPER_NOTE" />
+                <ScalarProperty Name="SIGN_DEC_BY" ColumnName="SIGN_DEC_BY" />
+                <ScalarProperty Name="SIGN_GOOD_BY" ColumnName="SIGN_GOOD_BY" />
+                <ScalarProperty Name="DOC_TYPE" ColumnName="DOC_TYPE" />
+                <ScalarProperty Name="CHECK_RECIEVE_BACK" ColumnName="CHECK_RECIEVE_BACK" />
+                <ScalarProperty Name="REFSHORT" ColumnName="REFSHORT" />
+                <ScalarProperty Name="REFSHORT_CUSTOMS" ColumnName="REFSHORT_CUSTOMS" />
+                <ScalarProperty Name="SHORT_TOTPACK" ColumnName="SHORT_TOTPACK" />
+                <ScalarProperty Name="SHORT_STATUS" ColumnName="SHORT_STATUS" />
+                <ScalarProperty Name="SHORT_USER" ColumnName="SHORT_USER" />
+                <ScalarProperty Name="SHORT_LASTUPDATE" ColumnName="SHORT_LASTUPDATE" />
+                <ScalarProperty Name="REFSHORTPOST" ColumnName="REFSHORTPOST" />
+                <ScalarProperty Name="REFSHORTPOST_CUSTOMS" ColumnName="REFSHORTPOST_CUSTOMS" />
+                <ScalarProperty Name="SHORTPOST_TOTPACK" ColumnName="SHORTPOST_TOTPACK" />
+                <ScalarProperty Name="SHORTPOST_USER" ColumnName="SHORTPOST_USER" />
+                <ScalarProperty Name="SHORTPOST_LASTUPDATE" ColumnName="SHORTPOST_LASTUPDATE" />
+                <ScalarProperty Name="TOTQTY" ColumnName="TOTQTY" />
+                <ScalarProperty Name="TOTQTY_U" ColumnName="TOTQTY_U" />
+                <ScalarProperty Name="DETAILFOB_VF" ColumnName="DETAILFOB_VF" />
+                <ScalarProperty Name="DETAILFOB_VB" ColumnName="DETAILFOB_VB" />
+                <ScalarProperty Name="CUSTOMS_MSG" ColumnName="CUSTOMS_MSG" />
+                <ScalarProperty Name="COMPANY_L" ColumnName="COMPANY_L" />
+                <ScalarProperty Name="CUSTOMS_CONT_MSG" ColumnName="CUSTOMS_CONT_MSG" />
+                <ScalarProperty Name="EXPORT_DATE" ColumnName="EXPORT_DATE" />
+                <ScalarProperty Name="PROFILE" ColumnName="PROFILE" />
+                <ScalarProperty Name="CANCEL_MSG" ColumnName="CANCEL_MSG" />
+                <ScalarProperty Name="COMPEN_ID" ColumnName="COMPEN_ID" />
+                <ScalarProperty Name="SHORT_TOTNET" ColumnName="SHORT_TOTNET" />
+                <ScalarProperty Name="SHORT_TOTGROSS" ColumnName="SHORT_TOTGROSS" />
+                <ScalarProperty Name="SHORTPOST_TOTNET" ColumnName="SHORTPOST_TOTNET" />
+                <ScalarProperty Name="SHORTPOST_TOTGROSS" ColumnName="SHORTPOST_TOTGROSS" />
+                <ScalarProperty Name="CM_TAX" ColumnName="CM_TAX" />
+                <ScalarProperty Name="CM_BRANCH" ColumnName="CM_BRANCH" />
+                <ScalarProperty Name="CM_THAI" ColumnName="CM_THAI" />
+                <ScalarProperty Name="CM_ENG" ColumnName="CM_ENG" />
+                <ScalarProperty Name="CM_STREET" ColumnName="CM_STREET" />
+                <ScalarProperty Name="CM_DISTRICT" ColumnName="CM_DISTRICT" />
+                <ScalarProperty Name="CM_SUBPROVINCE" ColumnName="CM_SUBPROVINCE" />
+                <ScalarProperty Name="CM_PROVINCE" ColumnName="CM_PROVINCE" />
+                <ScalarProperty Name="CM_POSTCODE" ColumnName="CM_POSTCODE" />
+                <ScalarProperty Name="VOY" ColumnName="VOY" />
+                <ScalarProperty Name="CM_PHONE" ColumnName="CM_PHONE" />
+                <ScalarProperty Name="CM_FAX" ColumnName="CM_FAX" />
+                <ScalarProperty Name="WEB_STATUS" ColumnName="WEB_STATUS" />
+                <ScalarProperty Name="WEB_REASON" ColumnName="WEB_REASON" />
+                <ScalarProperty Name="SPECIAL_REMARK" ColumnName="SPECIAL_REMARK" />
+                <ScalarProperty Name="CUTLIST" ColumnName="CUTLIST" />
+                <ScalarProperty Name="CUTDATE" ColumnName="CUTDATE" />
+                <ScalarProperty Name="CUTLIST_PRINTDATE" ColumnName="CUTLIST_PRINTDATE" />
+                <ScalarProperty Name="CHECK_AUDIT" ColumnName="CHECK_AUDIT" />
+                <ScalarProperty Name="CHECK_TRANFER" ColumnName="CHECK_TRANFER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
