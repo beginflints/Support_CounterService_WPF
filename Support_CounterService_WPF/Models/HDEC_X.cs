@@ -12,7 +12,7 @@ namespace Support_CounterService_WPF.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HDEC
+    public partial class HDEC_X
     {
         public string REFNO { get; set; }
         public string RUNNO { get; set; }

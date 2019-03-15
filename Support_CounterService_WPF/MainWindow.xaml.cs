@@ -38,7 +38,7 @@ namespace Support_CounterService_WPF
         ClsSetting setting = new ClsSetting();
         Services Services = new Services();
         List<FileInfo> ListAllFileInfo = new List<FileInfo>();
-        List<string> ListDECSNOUnion = new List<string>();
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -168,12 +168,13 @@ namespace Support_CounterService_WPF
 #endif
         }
 
-        private void DateChange()
+        private void RefreshDate()
         {
             if (StartDate.SelectedDate == null || EndDate.SelectedDate == null)
             {
                 return;
             }
+
             DateTime Enddate = EndDate.SelectedDate.Value.AddDays(1);
 
             using (oim_newEntities oim_New = new oim_newEntities())
@@ -181,19 +182,38 @@ namespace Support_CounterService_WPF
             using (EXPORT_AIREntities eXPORT_AIR = new EXPORT_AIREntities())
             using (EXPORT_XBORDEREntities eXPORT_XBORDER = new EXPORT_XBORDEREntities())
             {
-                var Listoim_newDECSNO = oim_New.CT_DEC.Where(a => a.SIGN_BY == "S" && a.DEC_CANCEL != "A" && a.DATE_T >= StartDate.SelectedDate && a.DATE_T < Enddate).Select(a => a.DECSNO).ToList();
-                var ListExportDECSNO = eXPORT.HDECs.Where(a => a.SIGN_DEC_BY == "S" && a.CANCEL_S != "A" && a.SEND_DATE >= StartDate.SelectedDate && a.SEND_DATE < Enddate).Select(a => a.DECLARATION_NO).ToList();
-                var ListExportAirDECSNO = eXPORT_AIR.HDECs.Where(a => a.SIGN_DEC_BY == "S" && a.CANCEL_S != "A" && a.SEND_DATE >= StartDate.SelectedDate && a.SEND_DATE < Enddate).Select(a => a.DECLARATION_NO).ToList();
-                var ListExportXBorderDECSNO = eXPORT_XBORDER.HDECs.Where(a => a.SIGN_DEC_BY == "S" && a.CANCEL_S != "A" && a.SEND_DATE >= StartDate.SelectedDate && a.SEND_DATE < Enddate).Select(a => a.DECLARATION_NO).ToList();
+                var Listoim_newDECSNO = oim_New.CT_DEC.Where(a => a.SIGN_BY == "S" && a.DEC_CANCEL != "A" && a.DATE_T >= StartDate.SelectedDate && a.DATE_T < Enddate).Select(a => new { DECLARATION_NO = a.DECSNO, SEND_DATE = a.DATE_T, TYPE = "Import" }).ToList();
+                var ListExportDECSNO = eXPORT.HDEC_N.Where(a => a.SIGN_DEC_BY == "S" && a.CANCEL_S != "A" && a.SEND_DATE >= StartDate.SelectedDate && a.SEND_DATE < Enddate).Select(a => new { a.DECLARATION_NO, a.SEND_DATE, TYPE = "Export" }).ToList();
+                var ListExportAirDECSNO = eXPORT_AIR.HDEC_A.Where(a => a.SIGN_DEC_BY == "S" && a.CANCEL_S != "A" && a.SEND_DATE >= StartDate.SelectedDate && a.SEND_DATE < Enddate).Select(a => new { a.DECLARATION_NO, a.SEND_DATE, TYPE = "ExportAir" }).ToList();
+                var ListExportXBorderDECSNO = eXPORT_XBORDER.HDEC_X.Where(a => a.SIGN_DEC_BY == "S" && a.CANCEL_S != "A" && a.SEND_DATE >= StartDate.SelectedDate && a.SEND_DATE < Enddate).Select(a => new { a.DECLARATION_NO, a.SEND_DATE, TYPE = "ExportXBorder" }).ToList();
 
-                //ListDECSNOUnion = Listoim_newDECSNO.Union(ListExportDECSNO).Union(ListExportAirDECSNO).Union(ListExportXBorderDECSNO).ToList();
+                var ListDECSNOUnion = Listoim_newDECSNO.Union(ListExportDECSNO).Union(ListExportAirDECSNO).Union(ListExportXBorderDECSNO).ToList();
+                GridMain.ItemsSource = ListDECSNOUnion;
+            }
+        }
+
+        private object GetCounter_DECSNO()
+        {
+            DateTime Enddate = EndDate.SelectedDate.Value.AddDays(1);
+
+            using (oim_newEntities oim_New = new oim_newEntities())
+            using (EXPORTEntities eXPORT = new EXPORTEntities())
+            using (EXPORT_AIREntities eXPORT_AIR = new EXPORT_AIREntities())
+            using (EXPORT_XBORDEREntities eXPORT_XBORDER = new EXPORT_XBORDEREntities())
+            {
+                var Listoim_newDECSNO = oim_New.CT_DEC.Where(a => a.SIGN_BY == "S" && a.DEC_CANCEL != "A").Select(a => new { DECLARATION_NO = a.DECSNO, SEND_DATE = a.DATE_T, TYPE = "Import" }).ToList();
+                var ListExportDECSNO = eXPORT.HDEC_N.Where(a => a.SIGN_DEC_BY == "S" && a.CANCEL_S != "A").Select(a => new { a.DECLARATION_NO, a.SEND_DATE, TYPE = "Export" }).ToList();
+                var ListExportAirDECSNO = eXPORT_AIR.HDEC_A.Where(a => a.SIGN_DEC_BY == "S" && a.CANCEL_S != "A").Select(a => new { a.DECLARATION_NO, a.SEND_DATE, TYPE = "ExportAir" }).ToList();
+                var ListExportXBorderDECSNO = eXPORT_XBORDER.HDEC_X.Where(a => a.SIGN_DEC_BY == "S" && a.CANCEL_S != "A").Select(a => new { a.DECLARATION_NO, a.SEND_DATE, TYPE = "ExportXBorder" }).ToList();
+
+                return Listoim_newDECSNO.Union(ListExportDECSNO).Union(ListExportAirDECSNO).Union(ListExportXBorderDECSNO).ToList();
                 //GridMain.ItemsSource = ListDECSNOUnion;
             }
         }
 
         private void BtnRefresh_Click(object sender, RoutedEventArgs e)
         {
-            DateChange();
+            RefreshDate();
         }
     }
 }

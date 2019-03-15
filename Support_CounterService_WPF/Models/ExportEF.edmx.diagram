@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="12df9f1bfe1b48dd9f1eebd212acb43c" Name="Diagram1" ZoomLevel="37">
-        <EntityTypeShape EntityType="EXPORTModel.HDEC" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="d9369692d3a64301a31d3d2161e40514" Name="Diagram1" ZoomLevel="37">
+        <EntityTypeShape EntityType="EXPORTModel.HDEC_N" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

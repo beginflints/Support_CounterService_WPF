@@ -25,6 +25,6 @@ namespace Support_CounterService_WPF.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<HDEC> HDECs { get; set; }
+        public virtual DbSet<HDEC_N> HDEC_N { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\OneDrive - NYK Group\Report\Support_CouterService_C#2017\Support_CounterService_WPF\Support_CounterService_WPF\Models\ExportXBorderEF.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\006587\OneDrive\Report\Support_CouterService_C#2017\Support_CounterService_WPF\Support_CounterService_WPF\Models\ExportXBorderEF.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

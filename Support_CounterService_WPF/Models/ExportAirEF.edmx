@@ -131,7 +131,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EXPORT_AIRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="HDEC">
+        <EntityType Name="HDEC_A">
           <Key>
             <PropertyRef Name="REFNO" />
           </Key>
@@ -250,7 +250,7 @@
           <Property Name="CHECK_TRANFER" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityContainer Name="EXPORT_AIREntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="HDECs" EntityType="Self.HDEC" />
+          <EntitySet Name="HDEC_A" EntityType="EXPORT_AIRModel.HDEC_A" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -258,8 +258,8 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EXPORT_AIRModelStoreContainer" CdmEntityContainer="EXPORT_AIREntities">
-          <EntitySetMapping Name="HDECs">
-            <EntityTypeMapping TypeName="EXPORT_AIRModel.HDEC">
+          <EntitySetMapping Name="HDEC_A">
+            <EntityTypeMapping TypeName="EXPORT_AIRModel.HDEC_A">
               <MappingFragment StoreEntitySet="HDEC">
                 <ScalarProperty Name="REFNO" ColumnName="REFNO" />
                 <ScalarProperty Name="RUNNO" ColumnName="RUNNO" />

@@ -131,7 +131,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EXPORTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="HDEC">
+        <EntityType Name="HDEC_N">
           <Key>
             <PropertyRef Name="REFNO" />
           </Key>
@@ -250,7 +250,7 @@
           <Property Name="GREENLINE_FLAG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityContainer Name="EXPORTEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="HDECs" EntityType="Self.HDEC" />
+          <EntitySet Name="HDEC_N" EntityType="EXPORTModel.HDEC_N" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -258,8 +258,8 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EXPORTModelStoreContainer" CdmEntityContainer="EXPORTEntities">
-          <EntitySetMapping Name="HDECs">
-            <EntityTypeMapping TypeName="EXPORTModel.HDEC">
+          <EntitySetMapping Name="HDEC_N">
+            <EntityTypeMapping TypeName="EXPORTModel.HDEC_N">
               <MappingFragment StoreEntitySet="HDEC">
                 <ScalarProperty Name="REFNO" ColumnName="REFNO" />
                 <ScalarProperty Name="RUNNO" ColumnName="RUNNO" />

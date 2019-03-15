@@ -135,7 +135,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ExportXBorderEF.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\HDEC.cs">
+    <Compile Include="Models\HDEC_A.cs">
+      <DependentUpon>ExportAirEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HDEC_N.cs">
+      <DependentUpon>ExportEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HDEC_X.cs">
       <DependentUpon>ExportXBorderEF.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\oim_newEF.Context.cs">

@@ -130,7 +130,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EXPORT_XBORDERModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="HDEC">
+        <EntityType Name="HDEC_X">
           <Key>
             <PropertyRef Name="REFNO" />
           </Key>
@@ -248,7 +248,7 @@
           <Property Name="TEST_PROFILE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityContainer Name="EXPORT_XBORDEREntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="HDECs" EntityType="Self.HDEC" />
+          <EntitySet Name="HDEC_X" EntityType="EXPORT_XBORDERModel.HDEC_X" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -256,8 +256,8 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EXPORT_XBORDERModelStoreContainer" CdmEntityContainer="EXPORT_XBORDEREntities">
-          <EntitySetMapping Name="HDECs">
-            <EntityTypeMapping TypeName="EXPORT_XBORDERModel.HDEC">
+          <EntitySetMapping Name="HDEC_X">
+            <EntityTypeMapping TypeName="EXPORT_XBORDERModel.HDEC_X">
               <MappingFragment StoreEntitySet="HDEC">
                 <ScalarProperty Name="REFNO" ColumnName="REFNO" />
                 <ScalarProperty Name="RUNNO" ColumnName="RUNNO" />
