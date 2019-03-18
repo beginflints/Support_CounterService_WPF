@@ -138,11 +138,19 @@
 
             <!--Grid Control-->
             <materialDesign:Card Grid.Column="1" Grid.RowSpan="3" Padding="10" Margin="5" VerticalAlignment="Stretch" UniformCornerRadius="6">
-                <dxg:GridControl Name="GridMain" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="Auto">
-                    <dxg:GridControl.View>
-                        <dxg:TableView AllowPerPixelScrolling="True" ShowTotalSummary="True" />
-                    </dxg:GridControl.View>
-                </dxg:GridControl>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <dxg:GridControl Name="GridMain" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="Auto">
+                        <dxg:GridControl.View>
+                            <dxg:TableView AllowPerPixelScrolling="True" ShowTotalSummary="True" />
+                        </dxg:GridControl.View>
+                    </dxg:GridControl>
+                    <TextBlock Grid.Row="1" Margin="5" Padding="5" Text="Successful : x / y" TextAlignment="Left" VerticalAlignment="Center"/>
+                </Grid>
             </materialDesign:Card>
         </Grid>
 

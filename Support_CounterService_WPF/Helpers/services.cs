@@ -34,7 +34,9 @@ namespace Support_CounterService_WPF.Helpers
 
         public List<FileInfo> GetFilesInfoPassedFilter(ClsSetting setting)
         {//ทุกไฟล์ของ PDF ที่ผ่าน Filter
-            var listFileInfo = new DirectoryInfo(setting.PathGetPDF).GetFiles("*.pdf").ToList();
+
+            //var listFileInfo = new DirectoryInfo(setting.PathGetPDF).GetFiles("*.pdf").ToList();
+            var listFileInfo = GetFiles_ThroughFolder(setting.PathGetPDF);
             return listFileInfo.Where(a => setting.ImportPrefix.Contains(a.Name.Substring(4, 1)) ||
                                            setting.ExportPrefix.Contains(a.Name.Substring(4, 1)))
                                            .ToList();
@@ -70,6 +72,12 @@ namespace Support_CounterService_WPF.Helpers
         public List<FileInfo> GetFiles_OnlyTopFolder(string path)
         {//Get Only File on Top Folder
             return new DirectoryInfo(path).GetFiles("*.pdf", SearchOption.TopDirectoryOnly).ToList();
+        }
+
+        public class FileStructure
+        {
+            public string Filename { get; set; }
+            public string FullFileName { get; set; }
         }
     }
 
