@@ -32,7 +32,7 @@ namespace Support_CounterService_WPF.Helpers
             }
         }
 
-        public List<FileInfo> GetFilterFilesInfo(ClsSetting setting)
+        public List<FileInfo> GetFilesInfoPassedFilter(ClsSetting setting)
         {//ทุกไฟล์ของ PDF ที่ผ่าน Filter
             var listFileInfo = new DirectoryInfo(setting.PathGetPDF).GetFiles("*.pdf").ToList();
             return listFileInfo.Where(a => setting.ImportPrefix.Contains(a.Name.Substring(4, 1)) ||
@@ -41,21 +41,35 @@ namespace Support_CounterService_WPF.Helpers
         }
 
         public List<FileInfo> GetFilesInfo(ClsSetting setting)
-        {//ทุกไฟล์ที่เป็นไฟล์ PDF แต่ยังไม่ผ่าน Filters
-            return new DirectoryInfo(setting.PathGetPDF).GetFiles("*.pdf").ToList();
+        {//ทุกไฟล์ใน Folder and SubFolder ที่เป็นไฟล์ PDF แต่ยังไม่ผ่าน Filters
+            return GetFiles_ThroughFolder(setting.PathGetPDF);
         }
 
-        public List<string> GetFilterFiles(List<string> ListFilenames, ClsSetting setting)
-        {
+        public List<string> GetFiles_PassedFilter(List<string> ListFilenames, ClsSetting setting)
+        {//เอา ลิสต์ชื่อไฟล์เข้ามา แล้วกรองเอาแต่ที่ตรงกับ Prefix ที่ต้องการค้นหาเท่านั้น
             ListFilenames = ListFilenames.Select(a => Path.GetFileName(a)).ToList();
             return ListFilenames.Where(a => setting.ImportPrefix.Contains(a.Substring(4, 1)) ||
                                             setting.ExportPrefix.Contains(a.Substring(4, 1)))
-                                .ToList();
+                                            .ToList();
+        }
+        
+        public List<string> GetFullNamesConvertToFilenames(List<string> ListFilenames)
+        {//Input List<FullName> => Output List<Filename>
+            return ListFilenames.Select(a => Path.GetFileName(a)).ToList();
+        }
+        public string GetFullNameConvertToFileName(string FullFileName)
+        {
+            return Path.GetFileName(FullFileName);
         }
 
-        public List<string> GetAllFiles(List<string> ListFilenames)
-        {
-            return ListFilenames.Select(a => Path.GetFileName(a)).ToList();
+        public List<FileInfo> GetFiles_ThroughFolder(string path)
+        {//Get Files ทั้งหมดที่อยู่ใน Folder and Sub-Folder
+            return new DirectoryInfo(path).GetFiles("*.pdf", SearchOption.AllDirectories).ToList();
+        }
+
+        public List<FileInfo> GetFiles_OnlyTopFolder(string path)
+        {//Get Only File on Top Folder
+            return new DirectoryInfo(path).GetFiles("*.pdf", SearchOption.TopDirectoryOnly).ToList();
         }
     }
 

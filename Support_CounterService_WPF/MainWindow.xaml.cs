@@ -34,9 +34,9 @@ namespace Support_CounterService_WPF
             InitializeComponent();
         }
 
-        List<string> listAllFileName = new List<string>();
-        ClsSetting setting = new ClsSetting();
+        List<string> listFileNames_PassedFilter = new List<string>();
         Services Services = new Services();
+        ClsSetting setting = new ClsSetting();
         List<FileInfo> ListAllFileInfo = new List<FileInfo>();
 
 
@@ -85,7 +85,7 @@ namespace Support_CounterService_WPF
                     //List files All.
                     ListAllFileInfo = Services.GetFilesInfo(setting);
                     //List file passed filter.
-                    var ListFilesInfo = Services.GetFilterFilesInfo(setting);
+                    var ListFilesInfo = Services.GetFilesInfoPassedFilter(setting);
 
                     var ListError = ListAllFileInfo.Select(a => a.Name).Except(ListFilesInfo.Select(a => a.Name)).ToList();
                     //
@@ -112,17 +112,14 @@ namespace Support_CounterService_WPF
                     };
                     if (openFileDialog.ShowDialog().Value == true)
                     {
-                        //Full Path
-                        listAllFileName = openFileDialog.FileNames.ToList();
-                        //All FileNames
-                        listAllFileName = Services.GetAllFiles(listAllFileName);
+                        //Full FileNames Passed Filter. ลิสต์ที่อยู่ไฟล์ที่เป็นเลขที่ใบขน
+                        listFileNames_PassedFilter = openFileDialog.FileNames.Where(a => setting.ImportPrefix.Contains(Services.GetFullNameConvertToFileName(a).Substring(4, 1)) ||
+                                                                             setting.ExportPrefix.Contains(Services.GetFullNameConvertToFileName(a).Substring(4, 1))).ToList();
 
-                        //อ่านไฟล์ PDF ทั้งหมดแล้ว filter แยกออกมาจากตัวที่ไม่ใช่เลขที่ใบขน
-                        var listFileName = Services.GetFilterFiles(listAllFileName, setting);
-
-                        var ListErrorFileName = listAllFileName.Except(listFileName).ToList();
+                        //แยกไฟล์ที่ไม่ใช่ใบขนออก 
+                        var ListErrorFileNames = openFileDialog.FileNames.Except(listFileNames_PassedFilter).Select(a => Services.GetFullNameConvertToFileName(a)).ToList();
                         //Display Only Error file Can't Get
-                        ShowList(ListErrorFileName);
+                        ShowList(ListErrorFileNames);
                     }
                 }
                 else return;
@@ -145,6 +142,13 @@ namespace Support_CounterService_WPF
                     ListView_ListFileName.Visibility = Header_PDFFiles.Visibility = Visibility.Collapsed;
                 }
             }
+
+
+        }
+
+        class ClsFile
+        {
+
         }
 
         private void BtnDoc_Click(object sender, RoutedEventArgs e)
@@ -152,20 +156,9 @@ namespace Support_CounterService_WPF
 
         }
 
-        private void CheckDEBUG()
+        private void BtnRefresh_Click(object sender, RoutedEventArgs e)
         {
-#if DEBUG
-            //MessageBox.Show("Debug Mode Start");
-#else
-            UploadAppClass app = new UploadAppClass();
-            app.PathTarget = @"\\172.19.102.43\data_i\Support_Counter_C#2017";
-            app.ApplicationExecutedFile = System.IO.Path.GetFileName(Application.ExecutablePath);
-
-            if (app.UploadApp_Version())
-            {
-                MessageBox.Show("Upload Successful.", "Done", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-#endif
+            RefreshDate();
         }
 
         private void RefreshDate()
@@ -192,8 +185,8 @@ namespace Support_CounterService_WPF
             }
         }
 
-        private object GetCounter_DECSNO()
-        {
+        private object GetAllCounter_DECSNO()
+        {//Get มาทั้งหมดเลย
             DateTime Enddate = EndDate.SelectedDate.Value.AddDays(1);
 
             using (oim_newEntities oim_New = new oim_newEntities())
@@ -201,19 +194,60 @@ namespace Support_CounterService_WPF
             using (EXPORT_AIREntities eXPORT_AIR = new EXPORT_AIREntities())
             using (EXPORT_XBORDEREntities eXPORT_XBORDER = new EXPORT_XBORDEREntities())
             {
-                var Listoim_newDECSNO = oim_New.CT_DEC.Where(a => a.SIGN_BY == "S" && a.DEC_CANCEL != "A").Select(a => new { DECLARATION_NO = a.DECSNO, SEND_DATE = a.DATE_T, TYPE = "Import" }).ToList();
-                var ListExportDECSNO = eXPORT.HDEC_N.Where(a => a.SIGN_DEC_BY == "S" && a.CANCEL_S != "A").Select(a => new { a.DECLARATION_NO, a.SEND_DATE, TYPE = "Export" }).ToList();
-                var ListExportAirDECSNO = eXPORT_AIR.HDEC_A.Where(a => a.SIGN_DEC_BY == "S" && a.CANCEL_S != "A").Select(a => new { a.DECLARATION_NO, a.SEND_DATE, TYPE = "ExportAir" }).ToList();
-                var ListExportXBorderDECSNO = eXPORT_XBORDER.HDEC_X.Where(a => a.SIGN_DEC_BY == "S" && a.CANCEL_S != "A").Select(a => new { a.DECLARATION_NO, a.SEND_DATE, TYPE = "ExportXBorder" }).ToList();
+                //Import
+                var Listoim_newDECSNO = oim_New.CT_DEC.Where(a => a.SIGN_BY == "S" && a.DEC_CANCEL != "A")
+                                                      .Select(a => new
+                                                      {
+                                                          DECLARATION_NO = a.DECSNO,
+                                                          SEND_DATE = a.DATE_T,
+                                                          TYPE = "Import"
+                                                      }).ToList();
+
+                //Export
+                var ListExportDECSNO = eXPORT.HDEC_N.Where(a => a.SIGN_DEC_BY == "S" && a.CANCEL_S != "A")
+                                                    .Select(a => new
+                                                    {
+                                                        a.DECLARATION_NO,
+                                                        a.SEND_DATE,
+                                                        TYPE = "Export"
+                                                    }).ToList();
+
+                //Export Air
+                var ListExportAirDECSNO = eXPORT_AIR.HDEC_A.Where(a => a.SIGN_DEC_BY == "S" && a.CANCEL_S != "A")
+                                                           .Select(a => new
+                                                           {
+                                                               a.DECLARATION_NO,
+                                                               a.SEND_DATE,
+                                                               TYPE = "ExportAir"
+                                                           }).ToList();
+
+                //Export XBorder
+                var ListExportXBorderDECSNO = eXPORT_XBORDER.HDEC_X.Where(a => a.SIGN_DEC_BY == "S" && a.CANCEL_S != "A")
+                                                                   .Select(a => new
+                                                                   {
+                                                                       a.DECLARATION_NO,
+                                                                       a.SEND_DATE,
+                                                                       TYPE = "ExportXBorder"
+                                                                   }).ToList();
 
                 return Listoim_newDECSNO.Union(ListExportDECSNO).Union(ListExportAirDECSNO).Union(ListExportXBorderDECSNO).ToList();
-                //GridMain.ItemsSource = ListDECSNOUnion;
             }
         }
 
-        private void BtnRefresh_Click(object sender, RoutedEventArgs e)
+        private void CheckDEBUG()
         {
-            RefreshDate();
+#if DEBUG
+            //MessageBox.Show("Debug Mode Start");
+#else
+            UploadAppClass app = new UploadAppClass();
+            app.PathTarget = @"\\172.19.102.43\data_i\Support_Counter_C#2017";
+            app.ApplicationExecutedFile = System.IO.Path.GetFileName(Application.ExecutablePath);
+
+            if (app.UploadApp_Version())
+            {
+                MessageBox.Show("Upload Successful.", "Done", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+#endif
         }
     }
 }

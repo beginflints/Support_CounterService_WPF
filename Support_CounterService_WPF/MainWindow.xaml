@@ -130,7 +130,7 @@
                 <materialDesign:Card  Padding="10" Margin="5" UniformCornerRadius="6">
                     <StackPanel>
                         <TextBlock Text="Monthly Report" Margin="10" FontWeight="Bold"  HorizontalAlignment="Center"/>
-                        <Button x:Name="BtnDoc" Content="Get Monthly Report" Margin="5" HorizontalAlignment="Stretch" ToolTip="Export Monthly Report." Click="BtnDoc_Click"/>
+                        <Button x:Name="BtnDoc" Content="Get Monthly Report" Margin="5" HorizontalAlignment="Stretch" ToolTip="Export Monthly Report." IsEnabled="False" Click="BtnDoc_Click"/>
                         <CheckBox Grid.Row="1" Content="Default Directory" Margin="5" IsChecked="False"/>
                     </StackPanel>
                 </materialDesign:Card>
