@@ -32,52 +32,56 @@ namespace Support_CounterService_WPF.Helpers
             }
         }
 
-        public List<FileInfo> GetFilesInfoPassedFilter(ClsSetting setting)
-        {//ทุกไฟล์ของ PDF ที่ผ่าน Filter
-
-            //var listFileInfo = new DirectoryInfo(setting.PathGetPDF).GetFiles("*.pdf").ToList();
-            var listFileInfo = GetFiles_ThroughFolder(setting.PathGetPDF);
-            return listFileInfo.Where(a => setting.ImportPrefix.Contains(a.Name.Substring(4, 1)) ||
-                                           setting.ExportPrefix.Contains(a.Name.Substring(4, 1)))
-                                           .ToList();
+        private List<ClsFileName> GetFiles_ThroughFolder(ClsSetting setting)
+        {//Get Files ทั้งหมดที่อยู่ใน Folder and Sub-Folder
+            List<ClsFileName> ListfileStructure = new List<ClsFileName>();
+            new DirectoryInfo(setting.PathGetPDF).GetFiles("*.pdf", SearchOption.AllDirectories).ToList()
+                                   .ForEach(a => { ListfileStructure.Add(new ClsFileName() { Filename = a.Name, FullFileName = a.FullName, FilenameWithOutExt = Path.GetFileNameWithoutExtension(a.Name) }); });
+            return ListfileStructure;
         }
 
-        public List<FileInfo> GetFilesInfo(ClsSetting setting)
+        public List<ClsFileName> GetFileFromPath(ClsSetting setting)
         {//ทุกไฟล์ใน Folder and SubFolder ที่เป็นไฟล์ PDF แต่ยังไม่ผ่าน Filters
-            return GetFiles_ThroughFolder(setting.PathGetPDF);
-        }
-
-        public List<string> GetFiles_PassedFilter(List<string> ListFilenames, ClsSetting setting)
-        {//เอา ลิสต์ชื่อไฟล์เข้ามา แล้วกรองเอาแต่ที่ตรงกับ Prefix ที่ต้องการค้นหาเท่านั้น
-            ListFilenames = ListFilenames.Select(a => Path.GetFileName(a)).ToList();
-            return ListFilenames.Where(a => setting.ImportPrefix.Contains(a.Substring(4, 1)) ||
-                                            setting.ExportPrefix.Contains(a.Substring(4, 1)))
-                                            .ToList();
+            return GetFiles_ThroughFolder(setting);
         }
         
-        public List<string> GetFullNamesConvertToFilenames(List<string> ListFilenames)
-        {//Input List<FullName> => Output List<Filename>
-            return ListFilenames.Select(a => Path.GetFileName(a)).ToList();
+        public List<ClsFileName> GetFilesPassedFilter(List<ClsFileName> ListFilenames, ClsSetting setting)
+        {//ทุกไฟล์ของ PDF ที่ผ่าน Filter
+            ListFilenames = ListFilenames.Where(a => setting.ImportPrefix.Contains(a.FilenameWithOutExt.Substring(4, 1)) || setting.ExportPrefix.Contains(a.FilenameWithOutExt.Substring(4, 1))).ToList();
+            return ListFilenames;
         }
-        public string GetFullNameConvertToFileName(string FullFileName)
+
+        public string FullFilenameToFilename(string FullFilename)
         {
-            return Path.GetFileName(FullFileName);
+            return Path.GetFileName(FullFilename);
+        }
+        public string FullFilenameToFilenameWOExt(string FullFilename)
+        {
+            return Path.GetFileNameWithoutExtension(FullFilename);
         }
 
-        public List<FileInfo> GetFiles_ThroughFolder(string path)
-        {//Get Files ทั้งหมดที่อยู่ใน Folder and Sub-Folder
-            return new DirectoryInfo(path).GetFiles("*.pdf", SearchOption.AllDirectories).ToList();
-        }
-
-        public List<FileInfo> GetFiles_OnlyTopFolder(string path)
-        {//Get Only File on Top Folder
-            return new DirectoryInfo(path).GetFiles("*.pdf", SearchOption.TopDirectoryOnly).ToList();
-        }
-
-        public class FileStructure
+        public class ClsFileName
         {
             public string Filename { get; set; }
             public string FullFileName { get; set; }
+            public string FilenameWithOutExt { get; set; }
+            public string TYPE { get; set; }
+            public DateTime? SEND_DATE { get; set; }
+        }
+
+
+        public class ClsError
+        {
+            public string Filename { get; set; }
+            public string FullFileName { get; set; }
+        }
+
+        public class CounterFile
+        {
+            public string DECLARATION_NO { get; set; }
+            public DateTime? SEND_DATE { get; set; }
+            public string TYPE { get; set; }
+            public string CANCEL_S { get; set; }
         }
     }
 

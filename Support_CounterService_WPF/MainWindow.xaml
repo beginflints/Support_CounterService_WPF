@@ -103,7 +103,10 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <Button x:Name="BtnArchivePDF" IsEnabled="True" Content="Archive PDF" HorizontalAlignment="Stretch" Background="#e53935" BorderBrush="#e53935" Margin="5" ToolTip="Archive PDF File in Directories." Click="BtnArchivePDF_Click"/>
+                            <materialDesign:Badged x:Name="BadgedAchivePDF" Badge="" Margin="5" HorizontalAlignment="Stretch">
+                                <Button x:Name="BtnArchivePDF" IsEnabled="True" Content="Archive PDF" Background="#e53935" BorderBrush="#e53935" ToolTip="Archive PDF File in Directories." Click="BtnArchivePDF_Click" Width="175" />
+                            </materialDesign:Badged>
+
                             <Button x:Name="BtnExportPDF" Grid.Column="1" IsEnabled="False" Content="Get PDF" HorizontalAlignment="Stretch" Background="#ffffff" BorderBrush="#e53935" Margin="5" Foreground="#e53935" ToolTip="Export PDF"/>
                             <CheckBox Grid.Row="1" 
                                       Content="Default Directory" 
@@ -121,8 +124,23 @@
                                       IsEnabled="False"
                                       ToolTip=""/>
                         </Grid>
-                        <TextBlock Margin="5" x:Name="Header_PDFFiles" Text="PDF_FILES can not match" FontWeight="Bold" Padding="5" Visibility="Collapsed"/>
-                        <ListView Margin="10" Name="ListView_ListFileName" Visibility="Collapsed"/>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="5" x:Name="Header_PDFFiles" Text="PDF Files can not match" FontWeight="Bold" Padding="5" Visibility="{Binding Visibility,ElementName=ListView_ListFileName}"/>
+                            <TextBlock Margin="5" x:Name="Counter_Files" Text="{Binding Items.Count, ElementName=ListView_ListFileName}" FontWeight="Bold" Padding="5" Visibility="{Binding Visibility,ElementName=ListView_ListFileName}"/>
+                        </StackPanel>
+
+                        <ListView x:Name="ListView_ListFileName" Margin="10" Visibility="Collapsed" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="290">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="FilePdf" Foreground="Red" Height="20" Width="20" Margin="20 0 10 0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding Filename}" VerticalAlignment="Center" Margin="10 0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                        </ListView>
                     </StackPanel>
                 </materialDesign:Card>
 

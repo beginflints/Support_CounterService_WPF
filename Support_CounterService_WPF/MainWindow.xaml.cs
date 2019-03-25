@@ -4,10 +4,12 @@ using Support_CounterService_WPF.Helpers;
 using Support_CounterService_WPF.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,11 +36,15 @@ namespace Support_CounterService_WPF
             InitializeComponent();
         }
 
-        List<ClsFileName> listFileNames_PassedFilter = new List<ClsFileName>();
+        List<Services.ClsFileName> listFileNames = new List<Services.ClsFileName>();
+        List<Services.ClsFileName> listFileNames_PassedFilter = new List<Services.ClsFileName>();
+        List<Services.ClsFileName> listFileNames_PassedFileterDB = new List<Services.ClsFileName>();
+        List<Services.ClsError> listFileNames_Error = new List<Services.ClsError>();
+
         Services Services = new Services();
         ClsSetting setting = new ClsSetting();
 
-        List<FileInfo> ListAllFileInfo = new List<FileInfo>();
+        List<FileInfo> ListAllFile = new List<FileInfo>();
 
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -70,7 +76,7 @@ namespace Support_CounterService_WPF
         {
             if (Directory.Exists(setting.PathArchivePDF))
             {//ถ้ามีโฟเดอร์ PathArchivePDF
-                List<ClsFileName> ListErrorFileNames = new List<ClsFileName>();
+                List<Services.ClsFileName> ListErrorFileNames = new List<Services.ClsFileName>();
                 if (Check_DefaultPDF.IsChecked.Value == true)
                 {//ถ้าเลือก Default Get Path
                     if (!Directory.Exists(setting.PathGetPDF))
@@ -84,17 +90,26 @@ namespace Support_CounterService_WPF
                         }
                         else return;
                     }
-                    //List files All.
-                    ListAllFileInfo = Services.GetFilesInfo(setting);
-                    //List file passed filter.
-                    var ListFileInfo_Passfilter = Services.GetFilesInfoPassedFilter(setting);
-                    ListFileInfo_Passfilter = ListFileInfo_Passfilter.Where(a => GetAllCounter().Select(b => b.DECLARATION_NO).Contains(Path.GetFileNameWithoutExtension(a.Name))).ToList();
-                    var ListError = ListAllFileInfo.Select(a => a.Name).Except(ListFileInfo_Passfilter.Select(a => a.Name)).ToList();
+                    //Get List files PDF From Path.
+                    listFileNames = Services.GetFileFromPath(setting);
+                    //Get List files Passed Filter.
+                    listFileNames_PassedFilter = Services.GetFilesPassedFilter(listFileNames, setting);
+                    //Get List file Passed Filter and have records in DB
+                    listFileNames_PassedFileterDB = GetCounter(listFileNames_PassedFilter);
 
+                    var li = listFileNames_PassedFileterDB.Select(a => a.FilenameWithOutExt).ToList();
+
+                    //Part Error
+                    //var listdecsno = listFileNames.Select(a => new Services.ClsError() { Filename = a.Filename, FullFileName = a.FullFileName }).ToList();
+                    //var listdecsno_PassFilter = listFileNames_PassedFilter.Select(a => new Services.ClsError() { Filename = a.Filename, FullFileName = a.FullFileName }).ToList();
+                    //var listdecsno_PassedFileterDB = listFileNames_PassedFileterDB.Select(a => new Services.ClsError() { Filename = a.Filename, FullFileName = a.FullFileName }).ToList();
+
+                    listFileNames_Error = listFileNames.Where(a => !li.Contains(a.FilenameWithOutExt)).Select(a => new Services.ClsError() { Filename = a.Filename, FullFileName = a.FullFileName }).ToList();
 
                     //แสดง list ชื่อไฟล์ที่ดึงมาแล้วผ่าน filter
-                    ShowList(ListError);
-                    ListError.Clear();
+                    ShowList(listFileNames_Error);
+
+                    MoveFileFromList(listFileNames_PassedFileterDB, setting);
                 }
                 else if (Check_DefaultPDF.IsChecked.Value == false)
                 {//ถ้า ไม่เลือก Default Get path จะเปิด Opendialog
@@ -108,18 +123,30 @@ namespace Support_CounterService_WPF
 
                     if (openFileDialog.ShowDialog().Value == true)
                     {
-                        //Full FileNames Passed Filter. ลิสต์ที่อยู่ไฟล์ที่เป็นเลขที่ใบขน
-                        listFileNames_PassedFilter = openFileDialog.FileNames.Where(a => setting.ImportPrefix.Contains(Services.GetFullNameConvertToFileName(a).Substring(4, 1)) ||
-                                                                             setting.ExportPrefix.Contains(Services.GetFullNameConvertToFileName(a).Substring(4, 1)))
-                                                                             .Select(a => new ClsFileName { FullFileName = a, FileName = Path.GetFileNameWithoutExtension(a) }).ToList();
-                        //var qwe = GetAllCounter().Where(a=>listFileNames_PassedFilter.Select(b=>b.FileName).Contains(a.DECLARATION_NO))
-                        listFileNames_PassedFilter = listFileNames_PassedFilter.Where(a => GetAllCounter().Select(b => b.DECLARATION_NO).Contains(a.FileName)).ToList();
-                        //แยกไฟล์ที่ไม่ใช่ใบขนออก 
-                        ListErrorFileNames.AddRange(openFileDialog.FileNames.Except(listFileNames_PassedFilter.Select(a => a.FullFileName))
-                                                               .Select(a => new ClsFileName { FullFileName = a, FileName = Path.GetFileNameWithoutExtension(a) }).ToList());
-                        //Display Only Error file Can't Get
-                        ShowList(ListErrorFileNames.Select(a => Path.GetFileName(a.FullFileName)).ToList());
-                        ListErrorFileNames.Clear();
+                        //Get List files PDF From OpenDialog.
+                        listFileNames = openFileDialog.FileNames.Select(a => new Services.ClsFileName()
+                        {
+                            FullFileName = a,
+                            Filename = Services.FullFilenameToFilename(a),
+                            FilenameWithOutExt = Services.FullFilenameToFilenameWOExt(a)
+                        }).ToList();
+                        //Get List files Passed Filter.
+                        listFileNames_PassedFilter = Services.GetFilesPassedFilter(listFileNames, setting);
+                        //Get List files Passed Filter and have record in DB
+                        listFileNames_PassedFileterDB = GetCounter(listFileNames_PassedFilter);
+
+                        var li = listFileNames_PassedFileterDB.Select(a => a.FilenameWithOutExt).ToList();
+                        //Part Error
+                        //var listdecsno = listFileNames.Select(a => new Services.ClsError() { Filename = a.Filename, FullFileName = a.FullFileName }).ToList();
+                        //var listdecsno_PassFilter = listFileNames_PassedFilter.Select(a => new Services.ClsError() { Filename = a.Filename, FullFileName = a.FullFileName }).ToList();
+                        //var listdecsno_PassedFileterDB = listFileNames_PassedFileterDB.Select(a => new Services.ClsError() { Filename = a.Filename, FullFileName = a.FullFileName }).ToList();
+
+                        listFileNames_Error = listFileNames.Where(a => !li.Contains(a.FilenameWithOutExt)).Select(a => new Services.ClsError() { Filename = a.Filename, FullFileName = a.FullFileName }).ToList();
+
+                        //แสดง list ชื่อไฟล์ที่ดึงมาแล้วผ่าน filter
+                        ShowList(listFileNames_Error);
+
+                        MoveFileFromList(listFileNames_PassedFileterDB, setting);
                     }
                 }
                 else return;
@@ -129,67 +156,116 @@ namespace Support_CounterService_WPF
                 OpenSettingDialog();
             }
 
-            void ShowList(List<string> list)
+            void ShowList(List<Services.ClsError> list)
             {
                 if (list.Count > 0)
                 {
                     ListView_ListFileName.ItemsSource = list.ToList();
-                    ListView_ListFileName.Visibility = Header_PDFFiles.Visibility = Visibility.Visible;
+                    ListView_ListFileName.Visibility = Visibility.Visible;
                     ListView_ListFileName.Height = 150;
                 }
                 else
                 {
-                    ListView_ListFileName.Visibility = Header_PDFFiles.Visibility = Visibility.Collapsed;
+                    ListView_ListFileName.Visibility = Visibility.Collapsed;
                 }
             }
         }
 
-        class ClsFileName
-        {
-            public string FileName { get; set; }
-            public string FullFileName { get; set; }
-        }
-
         private void BtnDoc_Click(object sender, RoutedEventArgs e)
         {
-
+            //Not yet to use
         }
 
         private void BtnRefresh_Click(object sender, RoutedEventArgs e)
         {
-            RefreshDate();
+            RefreshGrid();
         }
 
-        private void RefreshDate()
+        private void RefreshGrid()
         {
             if (StartDate.SelectedDate == null || EndDate.SelectedDate == null)
             {
                 return;
             }
 
-            DateTime Enddate = EndDate.SelectedDate.Value.AddDays(1);
-            GridMain.ItemsSource = GetAllCounter().Where(a => a.SEND_DATE >= StartDate.SelectedDate && a.SEND_DATE < Enddate).ToList();
+            //Get List Counter from DB Via use DateTime
+            GridMain.ItemsSource = GetCounterViaDate((DateTime)StartDate.SelectedDate, (DateTime)EndDate.SelectedDate);
         }
 
-        class CounterFile
-        {
-            public string DECLARATION_NO { get; set; }
-            public DateTime? SEND_DATE { get; set; }
-            public string TYPE { get; set; }
-            public string CANCEL_S { get; set; }
-        }
-
-        private List<CounterFile> GetAllCounter()
-        {//Get มาทั้งหมดเลย
+        private List<Services.ClsFileName> GetCounter(List<Services.ClsFileName> listFileName)
+        {//Get มาทั้งหมดเลย จาก DB ทั้ง Cancel หรือไม่ Cancel
 
             using (oim_newEntities oim_New = new oim_newEntities())
             using (EXPORTEntities eXPORT = new EXPORTEntities())
             using (EXPORT_AIREntities eXPORT_AIR = new EXPORT_AIREntities())
             using (EXPORT_XBORDEREntities eXPORT_XBORDER = new EXPORT_XBORDEREntities())
             {
+                var listfilenameWO = listFileName.Select(b => b.FilenameWithOutExt).ToList();
+
                 //Import
-                var Listoim_newDECSNO = oim_New.CT_DEC.Where(a => a.SIGN_BY == "S")
-                                                      .Select(a => new CounterFile
+                var List_DECSNO = oim_New.CT_DEC.Where(a => a.SIGN_BY == "S" && listfilenameWO.Contains(a.DECSNO))
+                                                      .Select(a => new { DECLARATION_NO = a.DECSNO, SEND_DATE = a.DATE_T }).ToList();
+
+                var list_oimnew = listFileName.Where(a => List_DECSNO.Select(b => b.DECLARATION_NO).Contains(a.FilenameWithOutExt)).Select(a => new Services.ClsFileName()
+                {
+                    FilenameWithOutExt = a.FilenameWithOutExt,
+                    Filename = a.Filename,
+                    FullFileName = a.FullFileName,
+                    TYPE = "Import",
+                    SEND_DATE = List_DECSNO.Where(b => b.DECLARATION_NO == a.FilenameWithOutExt).Select(b => b.SEND_DATE).FirstOrDefault()
+                }).ToList();
+
+                //Export
+                List_DECSNO = eXPORT.HDEC_N.Where(a => a.SIGN_DEC_BY == "S" && listfilenameWO.Contains(a.DECLARATION_NO))
+                                                    .Select(a => new { a.DECLARATION_NO, a.SEND_DATE }).ToList();
+                var list_Export = listFileName.Where(a => List_DECSNO.Select(b => b.DECLARATION_NO).Contains(a.FilenameWithOutExt)).Select(a => new Services.ClsFileName()
+                {
+                    FilenameWithOutExt = a.FilenameWithOutExt,
+                    Filename = a.Filename,
+                    FullFileName = a.FullFileName,
+                    TYPE = "Export",
+                    SEND_DATE = List_DECSNO.Where(b => b.DECLARATION_NO == a.FilenameWithOutExt).Select(b => b.SEND_DATE).FirstOrDefault()
+                }).ToList();
+
+                //Export Air
+                List_DECSNO = eXPORT_AIR.HDEC_A.Where(a => a.SIGN_DEC_BY == "S" && listfilenameWO.Contains(a.DECLARATION_NO))
+                                                          .Select(a => new { a.DECLARATION_NO, a.SEND_DATE }).ToList();
+                var list_ExportAir = listFileName.Where(a => List_DECSNO.Select(b => b.DECLARATION_NO).Contains(a.FilenameWithOutExt)).Select(a => new Services.ClsFileName()
+                {
+                    FilenameWithOutExt = a.FilenameWithOutExt,
+                    Filename = a.Filename,
+                    FullFileName = a.FullFileName,
+                    TYPE = "ExportAIR",
+                    SEND_DATE = List_DECSNO.Where(b => b.DECLARATION_NO == a.FilenameWithOutExt).Select(b => b.SEND_DATE).FirstOrDefault()
+                }).ToList();
+
+                //Export XBorder
+                List_DECSNO = eXPORT_XBORDER.HDEC_X.Where(a => a.SIGN_DEC_BY == "S" && listfilenameWO.Contains(a.DECLARATION_NO))
+                                                                   .Select(a => new { a.DECLARATION_NO, a.SEND_DATE }).ToList();
+                var list_ExportXBorder = listFileName.Where(a => List_DECSNO.Select(b => b.DECLARATION_NO).Contains(a.FilenameWithOutExt)).Select(a => new Services.ClsFileName()
+                {
+                    FilenameWithOutExt = a.FilenameWithOutExt,
+                    Filename = a.Filename,
+                    FullFileName = a.FullFileName,
+                    TYPE = "ExportXBorder",
+                    SEND_DATE = List_DECSNO.Where(b => b.DECLARATION_NO == a.FilenameWithOutExt).Select(b => b.SEND_DATE).FirstOrDefault()
+                }).ToList();
+
+                return list_oimnew.Union(list_Export).Union(list_ExportAir).Union(list_ExportXBorder).ToList();
+            }
+        }
+
+        private List<Services.CounterFile> GetCounterViaDate(DateTime StartDate, DateTime EndDate)
+        {//Get มาทั้งหมดเลย จาก DB ทั้ง Cancel หรือไม่ Cancel
+            EndDate = EndDate.AddDays(1);
+            using (oim_newEntities oim_New = new oim_newEntities())
+            using (EXPORTEntities eXPORT = new EXPORTEntities())
+            using (EXPORT_AIREntities eXPORT_AIR = new EXPORT_AIREntities())
+            using (EXPORT_XBORDEREntities eXPORT_XBORDER = new EXPORT_XBORDEREntities())
+            {
+                //Import
+                var Listoim_newDECSNO = oim_New.CT_DEC.Where(a => a.SIGN_BY == "S" && (a.DATE_T >= StartDate && a.DATE_T < EndDate.Date))
+                                                      .Select(a => new Services.CounterFile
                                                       {
                                                           DECLARATION_NO = a.DECSNO,
                                                           SEND_DATE = a.DATE_T,
@@ -198,8 +274,8 @@ namespace Support_CounterService_WPF
                                                       }).ToList();
 
                 //Export
-                var ListExportDECSNO = eXPORT.HDEC_N.Where(a => a.SIGN_DEC_BY == "S")
-                                                    .Select(a => new CounterFile
+                var ListExportDECSNO = eXPORT.HDEC_N.Where(a => a.SIGN_DEC_BY == "S" && (a.SEND_DATE >= StartDate && a.SEND_DATE < EndDate.Date))
+                                                    .Select(a => new Services.CounterFile
                                                     {
                                                         DECLARATION_NO = a.DECLARATION_NO,
                                                         SEND_DATE = a.SEND_DATE,
@@ -208,8 +284,8 @@ namespace Support_CounterService_WPF
                                                     }).ToList();
 
                 //Export Air
-                var ListExportAirDECSNO = eXPORT_AIR.HDEC_A.Where(a => a.SIGN_DEC_BY == "S")
-                                                           .Select(a => new CounterFile
+                var ListExportAirDECSNO = eXPORT_AIR.HDEC_A.Where(a => a.SIGN_DEC_BY == "S" && (a.SEND_DATE >= StartDate && a.SEND_DATE < EndDate.Date))
+                                                           .Select(a => new Services.CounterFile
                                                            {
                                                                DECLARATION_NO = a.DECLARATION_NO,
                                                                SEND_DATE = a.SEND_DATE,
@@ -218,8 +294,8 @@ namespace Support_CounterService_WPF
                                                            }).ToList();
 
                 //Export XBorder
-                var ListExportXBorderDECSNO = eXPORT_XBORDER.HDEC_X.Where(a => a.SIGN_DEC_BY == "S")
-                                                                   .Select(a => new CounterFile
+                var ListExportXBorderDECSNO = eXPORT_XBORDER.HDEC_X.Where(a => a.SIGN_DEC_BY == "S" && (a.SEND_DATE >= StartDate && a.SEND_DATE < EndDate.Date))
+                                                                   .Select(a => new Services.CounterFile
                                                                    {
                                                                        DECLARATION_NO = a.DECLARATION_NO,
                                                                        SEND_DATE = a.SEND_DATE,
@@ -229,6 +305,35 @@ namespace Support_CounterService_WPF
 
                 return Listoim_newDECSNO.Union(ListExportDECSNO).Union(ListExportAirDECSNO).Union(ListExportXBorderDECSNO).ToList();
             }
+        }
+
+        private void MoveFileFromList(List<Services.ClsFileName> ListFiles, ClsSetting setting)
+        {
+            var th = new CultureInfo("th-TH");
+            //Thread.CurrentThread.CurrentCulture = new CultureInfo("th-TH");
+            var YearMonth = ListFiles.Select(a => new { Year = a.SEND_DATE.Value.ToString("yyyy", th), Month = a.SEND_DATE.Value.ToString("MMMM", th) })
+                                     .Distinct().ToList();
+            //Create Folders
+            YearMonth.ForEach(a => { Directory.CreateDirectory(Path.Combine(setting.PathArchivePDF, a.Year, a.Month)); });
+            //Move Files
+            ListFiles.ForEach(a =>
+            {
+                var Des = Path.Combine(setting.PathArchivePDF, a.SEND_DATE.Value.ToString("yyyy", th), a.SEND_DATE.Value.ToString("MMMM", th));
+                if (File.Exists(Des))
+                {
+                    File.Copy(a.FullFileName, Des, true);
+                    File.Delete(a.FullFileName);
+                }
+            });
+            MessageBox.Show("Move File Done!");
+        }
+
+        void CountFilePathGetPDF()
+        {
+            //if (Directory.Exists())
+            //{
+
+            //}
         }
 
         private void CheckDEBUG()
