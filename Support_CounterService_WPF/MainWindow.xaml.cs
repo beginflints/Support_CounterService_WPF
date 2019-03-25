@@ -318,11 +318,15 @@ namespace Support_CounterService_WPF
             //Move Files
             ListFiles.ForEach(a =>
             {
-                var Des = Path.Combine(setting.PathArchivePDF, a.SEND_DATE.Value.ToString("yyyy", th), a.SEND_DATE.Value.ToString("MMMM", th));
+                var Des = Path.Combine(setting.PathArchivePDF, a.SEND_DATE.Value.ToString("yyyy", th), a.SEND_DATE.Value.ToString("MMMM", th), a.Filename);
                 if (File.Exists(Des))
                 {
                     File.Copy(a.FullFileName, Des, true);
                     File.Delete(a.FullFileName);
+                }
+                else
+                {
+                    File.Move(a.FullFileName, Des);
                 }
             });
             MessageBox.Show("Move File Done!");
