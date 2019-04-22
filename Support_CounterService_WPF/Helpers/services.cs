@@ -32,20 +32,20 @@ namespace Support_CounterService_WPF.Helpers
             }
         }
 
-        private List<ClsFileName> GetFiles_ThroughFolder(ClsSetting setting)
+        private List<ClsFileName> GetFiles_ThroughFolder(string path)
         {//Get Files ทั้งหมดที่อยู่ใน Folder and Sub-Folder
             List<ClsFileName> ListfileStructure = new List<ClsFileName>();
-            new DirectoryInfo(setting.PathGetPDF).GetFiles("*.pdf", SearchOption.AllDirectories).ToList()
-                                   .ForEach(a => { ListfileStructure.Add(new ClsFileName() { Filename = a.Name, FullFileName = a.FullName, FilenameWithOutExt = Path.GetFileNameWithoutExtension(a.Name) }); });
+            new DirectoryInfo(path).GetFiles("*.pdf", SearchOption.AllDirectories).ToList()
+                                   .ForEach(async a => { await Task.Run(() => ListfileStructure.Add(new ClsFileName() { Filename = a.Name, FullFileName = a.FullName, FilenameWithOutExt = Path.GetFileNameWithoutExtension(a.Name) })); });
             return ListfileStructure;
         }
 
-        public List<ClsFileName> GetFileFromPath(ClsSetting setting)
+        public List<ClsFileName> GetFileFromPath(string path)
         {//ทุกไฟล์ใน Folder and SubFolder ที่เป็นไฟล์ PDF แต่ยังไม่ผ่าน Filters
-            return GetFiles_ThroughFolder(setting);
+            return GetFiles_ThroughFolder(path);
         }
         
-        public List<ClsFileName> GetFilesPassedFilter(List<ClsFileName> ListFilenames, ClsSetting setting)
+        public List<ClsFileName> GetListFilesPassedFilter(List<ClsFileName> ListFilenames, ClsSetting setting)
         {//ทุกไฟล์ของ PDF ที่ผ่าน Filter
             ListFilenames = ListFilenames.Where(a => setting.ImportPrefix.Contains(a.FilenameWithOutExt.Substring(4, 1)) || setting.ExportPrefix.Contains(a.FilenameWithOutExt.Substring(4, 1))).ToList();
             return ListFilenames;
@@ -60,29 +60,13 @@ namespace Support_CounterService_WPF.Helpers
             return Path.GetFileNameWithoutExtension(FullFilename);
         }
 
-        public class ClsFileName
-        {
-            public string Filename { get; set; }
-            public string FullFileName { get; set; }
-            public string FilenameWithOutExt { get; set; }
-            public string TYPE { get; set; }
-            public DateTime? SEND_DATE { get; set; }
-        }
+        //public class ClsError
+        //{
+        //    public string Filename { get; set; }
+        //    public string FullFileName { get; set; }
+        //}
 
-
-        public class ClsError
-        {
-            public string Filename { get; set; }
-            public string FullFileName { get; set; }
-        }
-
-        public class CounterFile
-        {
-            public string DECLARATION_NO { get; set; }
-            public DateTime? SEND_DATE { get; set; }
-            public string TYPE { get; set; }
-            public string CANCEL_S { get; set; }
-        }
+       
     }
 
 

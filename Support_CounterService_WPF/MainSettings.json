@@ -1,7 +1,7 @@
 {
-  "PathArchivePDF": "C:\\Support_CounterService\\PathArchivePDF",
-  "PathGETPDF": "C:\\Support_CounterService\\PathGETPDF",
-  "PathMonthlyReport": "C:\\Support_CounterService\\PathMonthlyReport",
+  "PathArchivePDF": "\\\\172.19.137.17\\My PDF\\KeepPDF",
+  "PathGETPDF": "\\\\172.19.137.17\\My PDF\\GetPDF",
+  "PathMonthlyReport": "\\\\172.19.137.17\\My PDF",
   "ReleaseDate": "2019-12-14",
   "ImportPrefix": [ "0", "A", "C", "P" ],
   "ExportPrefix": [ "1", "B", "D" ]

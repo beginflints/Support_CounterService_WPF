@@ -167,7 +167,10 @@
                             <dxg:TableView AllowPerPixelScrolling="True" ShowTotalSummary="True" />
                         </dxg:GridControl.View>
                     </dxg:GridControl>
-                    <TextBlock Grid.Row="1" Margin="5" Padding="5" Text="Successful : x / y" TextAlignment="Left" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <!--<TextBlock Margin="5" Padding="5" Text="Successful : x / y" TextAlignment="Left" VerticalAlignment="Center"/>-->
+                        <Button Margin="5" Content="{materialDesign:PackIcon Kind=Download}" Background="#1565C0" ToolTip="Download To Excel" x:Name="DownloadExcel" Click="DownloadExcel_Click" Visibility="Collapsed"/>
+                    </StackPanel>
                 </Grid>
             </materialDesign:Card>
         </Grid>
