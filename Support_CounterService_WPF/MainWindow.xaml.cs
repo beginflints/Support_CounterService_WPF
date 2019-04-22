@@ -358,13 +358,16 @@ namespace Support_CounterService_WPF
             var thCulture = new CultureInfo("th-TH");
             var usCulture = new CultureInfo("en-US");
 
-            using (StreamWriter sw = new StreamWriter(Path.Combine(setting.PathArchivePDF, "LogMe.csv"), true))
-            {
-                if (!File.Exists(Path.Combine(setting.PathArchivePDF, "LogMe.csv")))
-                {//ถ้าไม่มีไฟล์ LogMe.csv
+            if (!File.Exists(Path.Combine(setting.PathArchivePDF, "LogMe.csv")))
+            {//ถ้าไม่มีไฟล์ LogMe.csv
+                using (StreamWriter sw = new StreamWriter(Path.Combine(setting.PathArchivePDF, "LogMe.csv"), true))
+                {
                     sw.WriteLine("Department,Type,DateTime,Operation,User,From,To");
                 }
+            }
 
+            using (StreamWriter sw = new StreamWriter(Path.Combine(setting.PathArchivePDF, "LogMe.csv"), true))
+            {
                 if (ListFiles.Any(a => a.TYPE == "Import"))
                 {
                     ListFiles.Where(a => a.TYPE == "Import").ToList().ForEach(a => Directory.CreateDirectory(Path.Combine(setting.PathArchivePDF, "Import", $"ใบขนขาเข้า ({a.SEND_DATE.Value.ToString("yyyy", usCulture)})", $"ใบขนขาเข้า เดือน{a.SEND_DATE.Value.ToString("MMMM", thCulture)} {a.SEND_DATE.Value.ToString("yyyy", thCulture)}")));
@@ -414,14 +417,14 @@ namespace Support_CounterService_WPF
                                          $"{DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss", usCulture)}," +
                                          $"Copy," +
                                          $"{Environment.UserName}," +
-                                         $"{Des}," +
+                                         $"{Des.ToString()}," +
                                          $"{a.FullFileName}");
                         }
                         else
                         {
                             File.Move(a.FullFileName, Des);
 
-                            sw.WriteLine($"Import," +
+                            sw.WriteLine($"Export," +
                                          $"{a.TYPE}," +
                                          $"{DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss", usCulture)}," +
                                          $"Move," +
