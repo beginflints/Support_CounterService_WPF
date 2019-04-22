@@ -358,40 +358,82 @@ namespace Support_CounterService_WPF
             var thCulture = new CultureInfo("th-TH");
             var usCulture = new CultureInfo("en-US");
 
-            if (ListFiles.Any(a => a.TYPE == "Import"))
+            using (StreamWriter sw = new StreamWriter(Path.Combine(setting.PathArchivePDF, "LogMe.csv"), true))
             {
-                ListFiles.Where(a => a.TYPE == "Import").ToList().ForEach(a => Directory.CreateDirectory(Path.Combine(setting.PathArchivePDF, "Import", $"ใบขนขาเข้า ({a.SEND_DATE.Value.ToString("yyyy", usCulture)})", $"ใบขนขาเข้า เดือน{a.SEND_DATE.Value.ToString("MMMM", thCulture)} {a.SEND_DATE.Value.ToString("yyyy", thCulture)}")));
-                ListFiles.Where(a => a.TYPE == "Import").ToList().ForEach(a =>
+                if (!File.Exists(Path.Combine(setting.PathArchivePDF, "LogMe.csv")))
+                {//ถ้าไม่มีไฟล์ LogMe.csv
+                    sw.WriteLine("Department,Type,DateTime,Operation,User,From,To");
+                }
+
+                if (ListFiles.Any(a => a.TYPE == "Import"))
+                {
+                    ListFiles.Where(a => a.TYPE == "Import").ToList().ForEach(a => Directory.CreateDirectory(Path.Combine(setting.PathArchivePDF, "Import", $"ใบขนขาเข้า ({a.SEND_DATE.Value.ToString("yyyy", usCulture)})", $"ใบขนขาเข้า เดือน{a.SEND_DATE.Value.ToString("MMMM", thCulture)} {a.SEND_DATE.Value.ToString("yyyy", thCulture)}")));
+                    ListFiles.Where(a => a.TYPE == "Import").ToList().ForEach(a =>
                     {
                         var Des = Path.Combine(setting.PathArchivePDF, "Import", $"ใบขนขาเข้า ({a.SEND_DATE.Value.ToString("yyyy", usCulture)})", $"ใบขนขาเข้า เดือน{a.SEND_DATE.Value.ToString("MMMM", thCulture)} {a.SEND_DATE.Value.ToString("yyyy", thCulture)}", a.Filename);
                         if (File.Exists(Des))
                         {
                             File.Copy(a.FullFileName, Des, true);
                             File.Delete(a.FullFileName);
+
+                            sw.WriteLine($"Import," +
+                                         $"Import," +
+                                         $"{DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss", usCulture)}," +
+                                         $"Copy," +
+                                         $"{Environment.UserName}," +
+                                         $"{Des}," +
+                                         $"{a.FullFileName}");
                         }
                         else
                         {
                             File.Move(a.FullFileName, Des);
+
+                            sw.WriteLine($"Import," +
+                                         $"Import," +
+                                         $"{DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss", usCulture)}," +
+                                         $"Move," +
+                                         $"{Environment.UserName}," +
+                                         $"{Des}," +
+                                         $"{a.FullFileName}");
                         }
                     });
-            }
-            else if (ListFiles.Any(a => a.TYPE != "Import"))
-            {
-                ListFiles.Where(a => a.TYPE != "Import").ToList().ForEach(a => Directory.CreateDirectory(Path.Combine(setting.PathArchivePDF, "Export", $"ใบขนขาออก ({a.SEND_DATE.Value.ToString("yyyy", usCulture)})", $"ใบขนขาออก เดือน{a.SEND_DATE.Value.ToString("MMMM", thCulture)} {a.SEND_DATE.Value.ToString("yyyy", thCulture)}")));
-                ListFiles.Where(a => a.TYPE != "Import").ToList().ForEach(a =>
+                }
+                else if (ListFiles.Any(a => a.TYPE != "Import"))
                 {
-                    var Des = Path.Combine(setting.PathArchivePDF, "Export", $"ใบขนขาออก ({a.SEND_DATE.Value.ToString("yyyy", usCulture)})", $"ใบขนขาออก เดือน{a.SEND_DATE.Value.ToString("MMMM", thCulture)} {a.SEND_DATE.Value.ToString("yyyy", thCulture)}", a.Filename);
-                    if (File.Exists(Des))
+                    ListFiles.Where(a => a.TYPE != "Import").ToList().ForEach(a => Directory.CreateDirectory(Path.Combine(setting.PathArchivePDF, "Export", $"ใบขนขาออก ({a.SEND_DATE.Value.ToString("yyyy", usCulture)})", $"ใบขนขาออก เดือน{a.SEND_DATE.Value.ToString("MMMM", thCulture)} {a.SEND_DATE.Value.ToString("yyyy", thCulture)}")));
+                    ListFiles.Where(a => a.TYPE != "Import").ToList().ForEach(a =>
                     {
-                        File.Copy(a.FullFileName, Des, true);
-                        File.Delete(a.FullFileName);
-                    }
-                    else
-                    {
-                        File.Move(a.FullFileName, Des);
-                    }
-                });
+                        var Des = Path.Combine(setting.PathArchivePDF, "Export", $"ใบขนขาออก ({a.SEND_DATE.Value.ToString("yyyy", usCulture)})", $"ใบขนขาออก เดือน{a.SEND_DATE.Value.ToString("MMMM", thCulture)} {a.SEND_DATE.Value.ToString("yyyy", thCulture)}", a.Filename);
+                        if (File.Exists(Des))
+                        {
+                            File.Copy(a.FullFileName, Des, true);
+                            File.Delete(a.FullFileName);
+
+                            sw.WriteLine($"Export," +
+                                         $"{a.TYPE}," +
+                                         $"{DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss", usCulture)}," +
+                                         $"Copy," +
+                                         $"{Environment.UserName}," +
+                                         $"{Des}," +
+                                         $"{a.FullFileName}");
+                        }
+                        else
+                        {
+                            File.Move(a.FullFileName, Des);
+
+                            sw.WriteLine($"Import," +
+                                         $"{a.TYPE}," +
+                                         $"{DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss", usCulture)}," +
+                                         $"Move," +
+                                         $"{Environment.UserName}," +
+                                         $"{Des}," +
+                                         $"{a.FullFileName}");
+                        }
+                    });
+                }
             }
+
+
             if (ListFiles.Count() > 1)
             {
                 MessageBox.Show($"Move {ListFiles.Count()} files Done!");
