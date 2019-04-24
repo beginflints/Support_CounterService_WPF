@@ -373,7 +373,9 @@ namespace Support_CounterService_WPF
                     ListFiles.Where(a => a.TYPE == "Import").ToList().ForEach(a => Directory.CreateDirectory(Path.Combine(setting.PathArchivePDF, "Import", $"ใบขนขาเข้า ({a.SEND_DATE.Value.ToString("yyyy", usCulture)})", $"ใบขนขาเข้า เดือน{a.SEND_DATE.Value.ToString("MMMM", thCulture)} {a.SEND_DATE.Value.ToString("yyyy", thCulture)}")));
                     ListFiles.Where(a => a.TYPE == "Import").ToList().ForEach(a =>
                     {
-                        var Des = Path.Combine(setting.PathArchivePDF, "Import", $"ใบขนขาเข้า ({a.SEND_DATE.Value.ToString("yyyy", usCulture)})", $"ใบขนขาเข้า เดือน{a.SEND_DATE.Value.ToString("MMMM", thCulture)} {a.SEND_DATE.Value.ToString("yyyy", thCulture)}", a.Filename);
+                        var utf8 = Path.Combine(setting.PathArchivePDF, "Import", $"ใบขนขาเข้า ({a.SEND_DATE.Value.ToString("yyyy", usCulture)})", $"ใบขนขาเข้า เดือน{a.SEND_DATE.Value.ToString("MMMM", thCulture)} {a.SEND_DATE.Value.ToString("yyyy", thCulture)}", a.Filename);
+                        var Des = Encoding.UTF8.GetString(Encoding.Default.GetBytes(utf8));
+                        
                         if (File.Exists(Des))
                         {
                             File.Copy(a.FullFileName, Des, true);
@@ -384,8 +386,8 @@ namespace Support_CounterService_WPF
                                          $"{DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss", usCulture)}," +
                                          $"Copy," +
                                          $"{Environment.UserName}," +
-                                         $"{Des}," +
-                                         $"{a.FullFileName}");
+                                         $"{a.FullFileName}," +
+                                         $"{Des}");
                         }
                         else
                         {
@@ -396,8 +398,8 @@ namespace Support_CounterService_WPF
                                          $"{DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss", usCulture)}," +
                                          $"Move," +
                                          $"{Environment.UserName}," +
-                                         $"{Des}," +
-                                         $"{a.FullFileName}");
+                                         $"{a.FullFileName}," +
+                                         $"{Des}");
                         }
                     });
                 }
@@ -406,7 +408,8 @@ namespace Support_CounterService_WPF
                     ListFiles.Where(a => a.TYPE != "Import").ToList().ForEach(a => Directory.CreateDirectory(Path.Combine(setting.PathArchivePDF, "Export", $"ใบขนขาออก ({a.SEND_DATE.Value.ToString("yyyy", usCulture)})", $"ใบขนขาออก เดือน{a.SEND_DATE.Value.ToString("MMMM", thCulture)} {a.SEND_DATE.Value.ToString("yyyy", thCulture)}")));
                     ListFiles.Where(a => a.TYPE != "Import").ToList().ForEach(a =>
                     {
-                        var Des = Path.Combine(setting.PathArchivePDF, "Export", $"ใบขนขาออก ({a.SEND_DATE.Value.ToString("yyyy", usCulture)})", $"ใบขนขาออก เดือน{a.SEND_DATE.Value.ToString("MMMM", thCulture)} {a.SEND_DATE.Value.ToString("yyyy", thCulture)}", a.Filename);
+                        var utf8 = Path.Combine(setting.PathArchivePDF, "Export", $"ใบขนขาออก ({a.SEND_DATE.Value.ToString("yyyy", usCulture)})", $"ใบขนขาออก เดือน{a.SEND_DATE.Value.ToString("MMMM", thCulture)} {a.SEND_DATE.Value.ToString("yyyy", thCulture)}", a.Filename);
+                        var Des = Encoding.UTF8.GetString(Encoding.Default.GetBytes(utf8));
                         if (File.Exists(Des))
                         {
                             File.Copy(a.FullFileName, Des, true);
@@ -417,8 +420,8 @@ namespace Support_CounterService_WPF
                                          $"{DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss", usCulture)}," +
                                          $"Copy," +
                                          $"{Environment.UserName}," +
-                                         $"{Des.ToString()}," +
-                                         $"{a.FullFileName}");
+                                         $"{a.FullFileName}," +
+                                         $"{Des}");
                         }
                         else
                         {
@@ -429,8 +432,8 @@ namespace Support_CounterService_WPF
                                          $"{DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss", usCulture)}," +
                                          $"Move," +
                                          $"{Environment.UserName}," +
-                                         $"{Des}," +
-                                         $"{a.FullFileName}");
+                                         $"{a.FullFileName}," +
+                                         $"{Des}");
                         }
                     });
                 }
@@ -495,7 +498,7 @@ namespace Support_CounterService_WPF
                 wb.SetCellValue(1, headcol++, "IsHavePDF");
 
                 int row = 2;
-                ListToExport.Where(a => a.TYPE == "ImportCopy").OrderBy(a => a.SEND_DATE).ToList().ForEach(a =>
+                ListToExport.Where(a => a.TYPE == "Import").OrderBy(a => a.SEND_DATE).ToList().ForEach(a =>
                       {
                           int col = 1;
                           wb.SetCellValue(row, col++, a.REFNO);
@@ -518,10 +521,11 @@ namespace Support_CounterService_WPF
                 wb.SetCellStyle(2, 3, row, 3, dateStyle);
                 wb.AutoFitColumn(1, 8);//Set Auto Fit
 
-                wb.CopyWorksheet("ImportCopy", "Import");
+                //wb.AddWorksheet("ImportCopy");
+                wb.CopyWorksheet("Import", "ImportCopy");
 
                 row = 2;
-                wb.AddWorksheet("ExportCopy");
+                wb.AddWorksheet("Export");
                 headcol = 1;
                 wb.SetCellValue(1, headcol++, "REF No");
                 wb.SetCellValue(1, headcol++, "Declaration No.");
@@ -553,7 +557,9 @@ namespace Support_CounterService_WPF
                         });
                 wb.SetCellStyle(2, 3, row, 3, dateStyle);
                 wb.AutoFitColumn(1, 8);//Set Auto Fit
-                wb.CopyWorksheet("ExportCopy", "Export");
+
+                //wb.AddWorksheet("ExportCopy");
+                wb.CopyWorksheet("Export", "ExportCopy");
 
                 SaveFileDialog saveFileDialog = new SaveFileDialog()
                 {
